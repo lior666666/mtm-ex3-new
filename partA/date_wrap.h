@@ -17,10 +17,12 @@ public:
     friend bool operator==(const DateWrap& date1, const DateWrap& date2);
     friend bool operator<(const DateWrap& date1, const DateWrap& date2);
     DateWrap operator++(int);
-	DateWrap& operator+=(int days); 
+    void ThrowNegetiveDays();
     class NegativeDays{};
     class InvalidDate{}; 
+    class AllocationFailed{}; 
 };
+DateWrap& operator+=(DateWrap& date, int days); 
 DateWrap operator+(const DateWrap& date, int days);
 DateWrap operator+(int days, const DateWrap& date);
 ostream& operator<<(ostream& out, const DateWrap& date); 

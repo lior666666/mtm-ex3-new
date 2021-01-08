@@ -1,4 +1,5 @@
 #include "date_wrap.h"
+
 namespace mtm
 {
     //#1
@@ -26,12 +27,6 @@ namespace mtm
     {
         dateDestroy(date);
     }
-
-    void DateWrap::ThrowNegetiveDays()
-    {
-        throw NegativeDays();
-    }
-    
     //#4
     DateWrap& DateWrap::operator=(const DateWrap& date_wrap)
     {
@@ -144,7 +139,7 @@ namespace mtm
     {
         if(days < 0)
         {
-            date_wrap.ThrowNegetiveDays();
+            throw NegativeDays();
         }
         while (days != 0)
         {

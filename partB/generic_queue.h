@@ -1,44 +1,44 @@
 #ifndef GENERIC_QUEUE_H_
 #define GENERIC_QUEUE_H_
 #include <iostream>
-namespace mtm{
-    template<class T>
-    struct Node {
-        Node<T>* next;
-        T data; 
-    };
-
+    namespace mtm {
     template<class T>
     class PriorityQueue
     {
-        Node<T>* next_pointer;
-        Node<T>* current_pointer;
-        Node<T>* first;
+        T data;
+        PriorityQueue<T>* next;
         public:
-            Node<T>* iterator;
+            PriorityQueue<T>* iterator;
             PriorityQueue<T>()
             {
                 iterator = NULL;
-                next_pointer = NULL;
-                current_pointer = NULL; 
-                first = NULL; 
+                next = NULL; 
             }
+            
             ~PriorityQueue<T>()
             {
-                while(next_pointer!=NULL)
+                if(this->next !=NULL)
                 {
-                   delete(current_pointer);
-                   current_pointer = next_pointer;
-                   next_pointer = next_pointer->next;  
+                    PriorityQueue<T>* current_pointer = this->next; 
+                    PriorityQueue<T>* next_pointer = current_pointer->next; 
+                    while(next_pointer!=NULL)
+                    {
+                        PriorityQueue<T>* temp_pointer = current_pointer;
+                        current_pointer = next_pointer;
+                        temp_pointer->next = NULL; 
+                        delete temp_pointer;
+                        next_pointer = next_pointer->next;  
+                    }
+                    delete current_pointer;
                 }
-                delete(current_pointer);
             }
+            
             /*
             PriorityQueue<T>(const PriorityQueue<T>& queue_to_copy)
             {
                 while(queue_to_copy.current_pointer!=NULL)
                 {
-                   current_pointer = new Node<T>;
+                   current_pointer = new PriorityQueue<T>;
                    current_pointer->data = queue_to_copy.current_pointer->data; 
                    current_pointer = current_pointer->next; 
                    queue_to_copy.current_pointer = queue_to_copy.current_pointer->next; 
@@ -72,7 +72,7 @@ namespace mtm{
                 delete(current_pointer);
                 while(queue_to_copy.current_pointer!=NULL)
                 {
-                   current_pointer = new Node<T>;
+                   current_pointer = new PriorityQueue<T>;
                    current_pointer->data = queue_to_copy.current_pointer->data; 
                    current_pointer = current_pointer->next; 
                    queue_to_copy.current_pointer = queue_to_copy.current_pointer->next; 
@@ -93,95 +93,93 @@ namespace mtm{
             }**/
             void addElement(T data) 
             {
-                if(first == NULL) 
+                PriorityQueue<T>* current_pointer;
+                if(next == NULL) 
                 {
                     // The list is empty
-                    current_pointer = new Node<T>;
+                    current_pointer = new PriorityQueue<T>;
                     current_pointer->data = data; // assuming T has a copy constructor. 
                     current_pointer->next = NULL;
-                    first = current_pointer;
+                    next = current_pointer; 
                 } 
-                else 
+                else // The list not empty
                 {
-                    // The list isn't empty
-                   if(data < current_pointer->data) // data smaller than first node in list 
+                    current_pointer = this;
+                    PriorityQueue<T>* next_pointer = current_pointer->next;   
+                    
+                    if(data < next_pointer->data) // if data smaller than the first element. 
                     {
-                        current_pointer = new Node<T>;
-                        current_pointer->data = data; 
-                        current_pointer->next = first;
-                        first = current_pointer;
-                        next_pointer = first->next; 
+                        PriorityQueue<T>* temp_pointer = new PriorityQueue<T>;
+                        temp_pointer->data = data; 
+                        current_pointer->next = temp_pointer;
+                        temp_pointer->next = next_pointer;
                     }
-                    else
+                    else 
                     {
-                        // The list has more than one element
+                        current_pointer = this->next;
+                        PriorityQueue<T>* next_pointer = current_pointer->next;   
                         while (next_pointer!= NULL)
                         { 
-                            if(data < next_pointer->data && current_pointer->data <data) // asumming T has '<' operator.
+                            if(data < next_pointer->data && current_pointer->data < data) // asumming T has '<' operator.
                             {
-                                Node<T>* temp_pointer = new Node<T>;
+                                PriorityQueue<T>* temp_pointer = new PriorityQueue<T>;
                                 temp_pointer->data = data; 
                                 current_pointer->next = temp_pointer;
                                 temp_pointer->next = next_pointer;
                                 break; 
                             }
-                            current_pointer = next_pointer;
-                            next_pointer = next_pointer->next;    
+                                current_pointer = next_pointer;
+                                next_pointer = next_pointer->next;    
                         }
                         if(next_pointer == NULL && current_pointer->data < data) 
                         {
-                            next_pointer = new Node<T>;
-                            next_pointer->data = data; 
-                            next_pointer->next = NULL; 
-                            current_pointer->next = next_pointer; 
-                        }
-                        current_pointer = first;
-                        next_pointer = current_pointer->next;    
+                            PriorityQueue<T>* temp_pointer = new PriorityQueue<T>;
+                            temp_pointer->data = data;  
+                            temp_pointer->next = NULL; 
+                            current_pointer->next = temp_pointer; 
+                        } 
                     }
                 }
             }
 
             void removeElement(T data)
             {
-               if(first != NULL)
+               if(next != NULL)
                {
-                    if(first->data == data)
+                    PriorityQueue<T>* current_pointer = this;
+                    PriorityQueue<T>* next_pointer = current_pointer->next;  
+                    /*
+                    if(current_pointer->data == data)
                     {
-                        Node<T>* temp_pointer = first;
-                        first = first->next; 
-                        delete(temp_pointer);
-                    }
-                    else
-                    {
+                        PriorityQueue<T>* temp_pointer = current_pointer;
+                        this->next = next_pointer; 
+                        temp_pointer->next = NULL;
+                        current_pointer->next = NULL;
+                        delete temp_pointer;
+                    }*/
+                    //else
+                   // {
                         while(next_pointer!=NULL)
                         {
                             if(next_pointer->data == data)
-                            {
-                                Node<T>* temp_pointer = next_pointer;
+                            {  
+                                PriorityQueue<T>* temp_pointer = next_pointer;
                                 next_pointer = next_pointer->next;
                                 current_pointer->next = next_pointer; 
-                                delete(temp_pointer);
+                                temp_pointer->next = NULL;
+                                //delete temp_pointer;
                                 break;
                             }
-                            next_pointer = next_pointer->next;
-                            current_pointer = current_pointer->next;
+                            current_pointer = next_pointer;
+                            next_pointer = current_pointer->next;
                         }
-                    }
-                    current_pointer = first; 
-                    if(current_pointer !=NULL)
-                    {
-                        next_pointer = current_pointer->next; 
-                    }
-                    else
-                    {
-                        next_pointer =  NULL; 
-                    }
-                    
+                   //}
                }
+
             }
-            Node<T>* getIterator()
+            PriorityQueue<T>* getIterator()
             {
-                iterator = first; 
+                iterator = next; 
                 return iterator; 
             }
 
@@ -189,21 +187,25 @@ namespace mtm{
             
             bool containsElement(T data)
             {
-                while(current_pointer!=NULL)
-                {
-                    if(current_pointer->data == data)
+                PriorityQueue<T>* current_pointer = next; 
+                if(current_pointer !=NULL)
+                {  
+                    while(current_pointer!=NULL)
                     {
-                        return true; 
+                        if(current_pointer->data == data)
+                        {
+                            return true; 
+                        }
+                        current_pointer = current_pointer->next;
                     }
                 }
-                current_pointer = first; 
-                return false; 
+                return false;
             }
             T getData()
             {
                 return iterator->data;
             }
-            Node<T>* getNext()
+            PriorityQueue<T>* getNext()
             {
                 iterator = iterator->next; 
                 return iterator;

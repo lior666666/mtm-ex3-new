@@ -9,7 +9,7 @@ int main()
     q.addElement(2);
     q.addElement(1);
     q.addElement(7);
-    Node<int>* tmp = q.getIterator();
+    PriorityQueue<int>* tmp = q.getIterator();
     q.removeElement(3);
     while(tmp!=NULL)
     {
@@ -17,6 +17,7 @@ int main()
         tmp = q.getNext();
     }
     std::cout<<std::endl;
+    
     return 0;
 }
 

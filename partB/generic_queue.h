@@ -7,8 +7,8 @@
     {
         T data;
         PriorityQueue<T>* next;
+        PriorityQueue<T>* iterator;
         public:
-            PriorityQueue<T>* iterator;
             PriorityQueue<T>()
             {
                 iterator = NULL;
@@ -95,6 +95,7 @@
                 }
                 return *this;
             }
+            //checks if element already in the list, true if he is false in not. 
             bool containsElement(T data)
             {
                 PriorityQueue<T>* current_pointer = next; 
@@ -111,6 +112,8 @@
                 }
                 return false;
             }
+            //adds a new element to the list by it's priotity. return true if sucsses, false if element already in the list. 
+            // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
             bool addElement(T data) 
             {
                 if(containsElement(data))
@@ -169,12 +172,9 @@
                 }
                 return false;
             }
-            /*
-            bool removeCurrent()
-            {
-               PriorityQueue<T>* current_pointer = this;
-               PriorityQueue<T>* next_pointer = next;   
-            }*/
+
+            //removes an elenemt from the list. returns true if the elemnt removed, and false if the elemnt not in the list. 
+            // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
             bool removeElement(T data)
             {
                if(next != NULL)
@@ -197,29 +197,65 @@
                }
                return false; 
             }
+
+            // removes the first element in the list. 
+            void removeTop()
+            {
+                if(next != NULL)
+                {
+                    PriorityQueue<T>* current_pointer = this;
+                    PriorityQueue<T>* next_pointer = next;
+                    current_pointer->next = current_pointer->next->next; 
+                    next_pointer->next = NULL;
+                    delete next_pointer; 
+                }
+            }
+            // nitialize the iterator to the top of the list and return it. 
             PriorityQueue<T>* getIterator()
             {
                 iterator = next; 
                 return iterator; 
             }
 
-            //not sure if we sholud have const version or regular one or both. 
-            
-           
-            T getData()
+            //returns the data of the first elemnt.      
+            const T getData()
             {
                 return iterator->data;
             }
+            // moves the iterator to the next element in the list and returns it. 
             PriorityQueue<T>* getNext()
             {
                 iterator = iterator->next; 
                 return iterator;
             } 
-            /*
-            const T getFirstData() 
+            friend std::ostream& operator<<(std::ostream& out, const PriorityQueue<T>& queue)
             {
-                return first->data; 
-            }**/
+                if(queue.next !=NULL)
+                {
+                    PriorityQueue<T>* temp_pointer = queue.next; 
+                    while (temp_pointer!=NULL)
+                    {
+                        out<<temp_pointer->data<<std::endl; 
+                        temp_pointer = temp_pointer->next; 
+                    }
+                    return out; 
+                }
+                out<<' '<<std::endl;
+                return out; 
+            }
+            // returns the size of the list. 
+            int getSize()
+            {
+                int counter = 0; 
+                PriorityQueue<T>* temp_pointer = next; 
+                while (temp_pointer!=NULL)
+                {
+                    counter++;
+                    temp_pointer = temp_pointer->next; 
+                }
+                return counter; 
+            }
     };
+    
 }
 #endif

@@ -9,15 +9,16 @@ int main()
     q.addElement(2);
     q.addElement(1);
     q.addElement(7);
-    PriorityQueue<int>* tmp = q.getIterator();
-    q.removeElement(3);
+    //q.removeElement(1);
+    //PriorityQueue<int> cp(q); 
+    PriorityQueue<int> cp = q;
+    PriorityQueue<int>* tmp = cp.getIterator();
     while(tmp!=NULL)
     {
-        std::cout<<q.getData()<<' '; 
-        tmp = q.getNext();
+        std::cout<<cp.getData()<<' '; 
+        tmp = cp.getNext();
     }
     std::cout<<std::endl;
-    
     return 0;
 }
 

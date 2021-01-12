@@ -3,7 +3,7 @@
 #include "base_event.h"
 
 namespace mtm{
-    class ClosedEvent : BaseEvent{
+    class ClosedEvent : public BaseEvent{
         PriorityQueue<long> event_invited;
     public:
         ClosedEvent(DateWrap date, char* name);

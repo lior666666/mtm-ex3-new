@@ -4,7 +4,7 @@
 
 namespace mtm{
     template<class CanRegister>
-    class CustomEvent : BaseEvent{
+    class CustomEvent : public BaseEvent{
         CanRegister register_condition;
     public:
         //#1
@@ -33,8 +33,9 @@ namespace mtm{
             DateWrap copied_date = DateWrap(this->event_date);
             char* copied_name = new char[strlen(this->event_name)];
             strcpy(copied_name, this->event_name);
-            CustomEvent copied_event(copied_date, copied_name, CanRegister(register_condition));
-            return &copied_event;
+            CustomEvent* copied_event = new CustomEvent(copied_date, copied_name, CanRegister(register_condition));
+            copied_event->event_participants = *(new PriorityQueue<long>(this->event_participants));
+            return copied_event;
         }
     };
 }

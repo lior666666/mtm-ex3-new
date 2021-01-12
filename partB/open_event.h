@@ -3,7 +3,7 @@
 #include "base_event.h"
 
 namespace mtm{
-    class OpenEvent : BaseEvent{ 
+    class OpenEvent : public BaseEvent{ 
     public:
         OpenEvent(DateWrap date, char* name);
         void registerParticipant(const long student) override;

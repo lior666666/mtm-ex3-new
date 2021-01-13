@@ -5,7 +5,6 @@ namespace mtm
     //#1
     DateWrap::DateWrap(int day, int month, int year)
     {
-        date = dateCreate(day, month, year);
         if(date == NULL)
         {
             throw InvalidDate(); 

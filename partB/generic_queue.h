@@ -60,11 +60,11 @@
                 {
                     return *this;
                 }
-                if(this->next !=NULL)
+                if(this->next != NULL)
                 {
                     PriorityQueue<T>* current_pointer = this->next; 
                     PriorityQueue<T>* next_pointer = current_pointer->next; 
-                    while(next_pointer!=NULL)
+                    while(next_pointer != NULL)
                     {
                         PriorityQueue<T>* temp_pointer = current_pointer;
                         current_pointer = next_pointer;
@@ -75,7 +75,7 @@
                     delete current_pointer;
                 }
                 data = queue_to_copy.data; 
-                if(queue_to_copy.next!=NULL)
+                if(queue_to_copy.next != NULL)
                 {
                     next = new PriorityQueue<T>;
                     PriorityQueue<T>* temp_pointer = queue_to_copy.next; 
@@ -101,7 +101,7 @@
                 PriorityQueue<T>* current_pointer = next; 
                 if(current_pointer !=NULL)
                 {  
-                    while(current_pointer!=NULL)
+                    while(current_pointer != NULL)
                     {
                         if(current_pointer->data == data)
                         {
@@ -147,7 +147,7 @@
                     {
                         current_pointer = this->next;
                         PriorityQueue<T>* next_pointer = current_pointer->next;   
-                        while (next_pointer!= NULL)
+                        while (next_pointer != NULL)
                         { 
                             if(data < next_pointer->data && current_pointer->data < data) // asumming T has '<' operator.
                             {
@@ -181,19 +181,19 @@
                {
                     PriorityQueue<T>* current_pointer = this;
                     PriorityQueue<T>* next_pointer = next;  
-                    while(next_pointer!=NULL)
-                        {
-                            if(next_pointer->data == data)
-                            {  
-                                //PriorityQueue<T>* temp_pointer = next_pointer;
-                                current_pointer->next = current_pointer->next->next; 
-                                next_pointer->next = NULL;
-                                delete next_pointer;
-                                return true; 
-                            }
-                            current_pointer = next_pointer;
-                            next_pointer = current_pointer->next;
+                    while(next_pointer != NULL)
+                    {
+                        if(next_pointer->data == data)
+                        {  
+                            //PriorityQueue<T>* temp_pointer = next_pointer;
+                            current_pointer->next = current_pointer->next->next; 
+                            next_pointer->next = NULL;
+                            delete next_pointer;
+                            return true; 
                         }
+                        current_pointer = next_pointer;
+                        next_pointer = current_pointer->next;
+                    }
                }
                return false; 
             }
@@ -210,6 +210,7 @@
                     delete next_pointer; 
                 }
             }
+
             // nitialize the iterator to the top of the list and return it. 
             PriorityQueue<T>* getIterator()
             {
@@ -217,38 +218,40 @@
                 return iterator; 
             }
 
-            //returns the data of the first elemnt.      
-            const T getData()
+            //returns the data of the current elemnt.      
+            T& getData()
             {
                 return iterator->data;
             }
+
             // moves the iterator to the next element in the list and returns it. 
             PriorityQueue<T>* getNext()
             {
                 iterator = iterator->next; 
                 return iterator;
-            } 
-            friend std::ostream& operator<<(std::ostream& out, const PriorityQueue<T>& queue)
+            }
+
+            std::ostream& printPriorityQueue(std::ostream& out) const
             {
-                if(queue.next !=NULL)
+                if(next != NULL)
                 {
-                    PriorityQueue<T>* temp_pointer = queue.next; 
-                    while (temp_pointer!=NULL)
+                    PriorityQueue<T>* temp_pointer = next; 
+                    while (temp_pointer != NULL)
                     {
-                        out<<temp_pointer->data<<std::endl; 
+                        out << temp_pointer->data << std::endl; 
                         temp_pointer = temp_pointer->next; 
                     }
                     return out; 
                 }
-                out<<' '<<std::endl;
                 return out; 
             }
+
             // returns the size of the list. 
             int getSize()
             {
                 int counter = 0; 
                 PriorityQueue<T>* temp_pointer = next; 
-                while (temp_pointer!=NULL)
+                while (temp_pointer != NULL)
                 {
                     counter++;
                     temp_pointer = temp_pointer->next; 

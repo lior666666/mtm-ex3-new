@@ -8,6 +8,7 @@ namespace mtm{
     class DateWrap{ 
         Date date;
     public:
+        DateWrap() = default;
         DateWrap(int day, int month, int year);
         DateWrap(const DateWrap& date);
         ~DateWrap();

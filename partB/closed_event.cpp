@@ -11,10 +11,11 @@ namespace mtm
     void ClosedEvent::addInvitee(const long student)
     {
         isVaildStudent(student);
-        if (!event_invited.addElement(student))
+        if (event_invited.containsElement(student))
         {
             throw AlreadyInvited();
         }
+        event_invited.addElement(student);
     }
 
     //#3
@@ -25,10 +26,11 @@ namespace mtm
         {
             throw RegistrationBlocked();
         }
-        if (!event_participants.addElement(student))
+        if (event_participants.containsElement(student))
         {
             throw AlreadyRegistered();
         }
+        event_participants.addElement(student);
     }
 
     //#4

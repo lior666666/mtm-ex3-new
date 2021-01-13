@@ -22,10 +22,11 @@ namespace mtm{
             {
                 throw RegistrationBlocked();
             }
-            if (!event_participants.addElement(student))
+            if (event_participants.containsElement(student))
             {
                 throw AlreadyRegistered();
             }
+            event_participants.addElement(student);
         }
 
         //#3

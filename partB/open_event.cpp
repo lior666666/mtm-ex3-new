@@ -11,10 +11,11 @@ namespace mtm
     void OpenEvent::registerParticipant(const long student)
     {
         isVaildStudent(student);
-        if (!event_participants.addElement(student))
+        if (event_participants.containsElement(student))
         {
             throw AlreadyRegistered();
         }
+        event_participants.addElement(student);
     }
 
     //#3

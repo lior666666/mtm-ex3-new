@@ -17,7 +17,7 @@ namespace mtm{
         void unregisterParticipant(const long student);
         std::ostream& printShort(std::ostream& out) const;
         std::ostream& printLong(std::ostream& out) const;
-        DateWrap getDate(); 
+        const DateWrap& getDate(); 
         virtual BaseEvent* clone() const = 0;
     };
     void isVaildStudent(const long student);

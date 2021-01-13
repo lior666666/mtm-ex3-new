@@ -6,7 +6,6 @@ namespace mtm{
     {
         this->event_date = date; 
     }
-
     void Festival::add(BaseEvent& event)
     {
         if(event.getDate() != event_date)
@@ -16,7 +15,7 @@ namespace mtm{
         else
         {
             BaseEvent* copy_event = event.clone(); 
-            events_list.addElement(copy_event);  //CONTINUE FROM HERE
+            events_list.addElement(copy_event); 
         }
         
     }  

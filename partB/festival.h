@@ -6,7 +6,7 @@ namespace mtm{
         DateWrap event_date; 
         public:
         Festival(DateWrap date);  
-        void add(BaseEvent& event) override; 
+        void add(BaseEvent& event) override;
     };
 }
 #endif

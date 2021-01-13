@@ -172,6 +172,10 @@
                 }
                 return false;
             }
+            bool addElement(T* data_pointer) 
+            {
+               return addElement((*data_pointer));
+            }
 
             //removes an elenemt from the list. returns true if the elemnt removed, and false if the elemnt not in the list. 
             // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
@@ -197,6 +201,32 @@
                }
                return false; 
             }
+            //removes an elenemt from the list. returns true if the elemnt removed, and false if the elemnt not in the list. 
+            // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
+            bool removeElement(T data)
+            {
+               if(next != NULL)
+               {
+                    PriorityQueue<T>* current_pointer = this;
+                    PriorityQueue<T>* next_pointer = next;  
+                    while(next_pointer != NULL)
+                    {
+                        if(next_pointer->data == data)
+                        {  
+                            //PriorityQueue<T>* temp_pointer = next_pointer;
+                            current_pointer->next = current_pointer->next->next; 
+                            next_pointer->next = NULL;
+                            delete next_pointer;
+                            return true; 
+                        }
+                        current_pointer = next_pointer;
+                        next_pointer = current_pointer->next;
+                    }
+               }
+               return false; 
+            }
+
+            
 
             // removes the first element in the list. 
             void removeTop()

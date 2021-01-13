@@ -6,9 +6,36 @@ namespace mtm{
     template<class EventType>
     class RecurringEvent : public EventContainer
     {
-        DateWrap first_date; 
+        DateWrap first_event_date; 
         char* event_name;
-        int num_occurrences;
-        int days_interval; 
+        int num_event_occurrences;
+        int days_event_interval; 
+        public:
+        RecurringEvent<EventType>(DateWrap first_date, char* name, int num_occurrences, int days_interval) : EventContainer(),first_event_date(first_date) , event_name(name), 
+        num_event_occurrences(num_occurrences), days_event_interval(days_interval) 
+        {
+            if(num_event_occurrences < 1)
+            {
+                throw InvalidNumber();
+            }
+            if(days_event_interval < 1)
+            {
+                throw InvalidInterval(); 
+            }
+            DateWrap temp_date = first_event_date; 
+            events_list.addElement(EventType(temp_date, event_name));
+            for (int i = 0; i < num_event_occurrences; i++)
+            {
+                temp_date += days_event_interval; 
+                events_list.addElement(EventType(temp_date, event_name));
+            }
+        }
+        void add(BaseEvent& event) override
+        {
+            throw NotSupported(); 
+        }
+
     };
+
 }
+#endif

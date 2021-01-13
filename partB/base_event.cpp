@@ -46,7 +46,7 @@ namespace mtm
             throw InvalidStudent();
         }
     } 
-    const DateWrap& BaseEvent::getDate()
+    const DateWrap& BaseEvent::getDate() const
     {
         return event_date; 
     }

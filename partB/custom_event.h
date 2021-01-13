@@ -9,6 +9,7 @@ namespace mtm{
     public:
         //#1
         //priority queue will be initialized by default constructor
+        CustomEvent() = default;
         CustomEvent(DateWrap date, char* name, CanRegister condition) : 
             BaseEvent(date, name), register_condition(condition) {
         }

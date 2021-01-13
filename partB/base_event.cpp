@@ -36,9 +36,31 @@ namespace mtm
     }
 
     //#6
-    //******pure virtual*****
+    const DateWrap& BaseEvent::getDate() const
+    {
+        return event_date;
+    }
 
     //#7
+    //******pure virtual*****
+
+    //#8
+    bool operator==(const BaseEvent& event1, const BaseEvent& event2)
+    {
+        return event1.event_date == event2.event_date && strcmp(event1.event_name, event2.event_name) == 0;
+    }
+
+    //#9
+    bool operator<(const BaseEvent& event1, const BaseEvent& event2)
+    {
+        if (event1.event_date == event2.event_date)
+        {
+            return strcmp(event1.event_name, event2.event_name) < 0;
+        }
+        return event1.event_date < event2.event_date;
+    }
+
+    //#10
     void isVaildStudent(const long student)
     {
         if (student < 1 || student > 1234567890)

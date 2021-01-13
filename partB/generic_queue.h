@@ -9,11 +9,13 @@
         PriorityQueue<T>* next;
         PriorityQueue<T>* iterator;
         public:
+
             PriorityQueue<T>()
             {
                 iterator = NULL;
                 next = NULL; 
             }
+
             ~PriorityQueue<T>()
             {
                 if(this->next !=NULL)
@@ -31,6 +33,7 @@
                     delete current_pointer;
                 }
             }
+
             PriorityQueue<T>(const PriorityQueue<T>& queue_to_copy)
             {
                 data = queue_to_copy.data; 
@@ -95,6 +98,7 @@
                 }
                 return *this;
             }
+
             //checks if element already in the list, true if he is false in not. 
             bool containsElement(T data)
             {
@@ -112,6 +116,7 @@
                 }
                 return false;
             }
+
             //adds a new element to the list by it's priotity. return true if sucsses, false if element already in the list. 
             // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
             bool addElement(T data) 
@@ -218,8 +223,8 @@
                 return iterator; 
             }
 
-            //returns the data of the first elemnt.      
-            const T getData()
+            //returns the data of the current elemnt.      
+            T& getData()
             {
                 return iterator->data;
             }
@@ -247,7 +252,7 @@
             }
 
             // returns the size of the list. 
-            int getSize()
+            int getSize() const
             {
                 int counter = 0; 
                 PriorityQueue<T>* temp_pointer = next; 
@@ -257,6 +262,26 @@
                     temp_pointer = temp_pointer->next; 
                 }
                 return counter; 
+            }
+
+            friend bool operator==(const PriorityQueue<T>& queue1, const PriorityQueue<T>& queue2)
+            {
+                PriorityQueue<T>* queue1_pointer = queue1.next;
+                PriorityQueue<T>* queue2_pointer = queue2.next;
+                if (queue1.getSize() != queue2.getSize())
+                {
+                    return false;
+                }
+                while (queue1_pointer->next != NULL)
+                {
+                    if (queue1_pointer->data != queue2_pointer->data)
+                    {
+                        return false;
+                    }
+                    queue1_pointer = queue1_pointer->next;
+                    queue2_pointer = queue2_pointer->next;
+                }
+                return true;
             }
     };
     

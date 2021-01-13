@@ -5,6 +5,7 @@
 namespace mtm{
     class OpenEvent : public BaseEvent{ 
     public:
+        OpenEvent() = default;
         OpenEvent(DateWrap date, char* name);
         void registerParticipant(const long student) override;
         BaseEvent* clone() const override;

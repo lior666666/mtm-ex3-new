@@ -6,6 +6,7 @@ namespace mtm{
     class ClosedEvent : public BaseEvent{
         PriorityQueue<long> event_invited;
     public:
+        ClosedEvent() = default;
         ClosedEvent(DateWrap date, char* name);
         void addInvitee(const long student);
         void registerParticipant(const long student) override;

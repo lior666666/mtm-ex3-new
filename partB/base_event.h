@@ -12,12 +12,16 @@ namespace mtm{
         DateWrap event_date;
         PriorityQueue<long> event_participants;
     public:
+        BaseEvent() = default;
         BaseEvent(DateWrap date, char* name);
         virtual void registerParticipant(const long student) = 0;
         void unregisterParticipant(const long student);
         std::ostream& printShort(std::ostream& out) const;
         std::ostream& printLong(std::ostream& out) const;
+        const DateWrap& getDate() const;
         virtual BaseEvent* clone() const = 0;
+        friend bool operator==(const BaseEvent& event1, const BaseEvent& event2);
+        friend bool operator<(const BaseEvent& event1, const BaseEvent& event2);
     };
     void isVaildStudent(const long student);
 }

@@ -10,19 +10,19 @@ namespace mtm{
         protected:
         PriorityQueue<BaseEvent&> events_list; 
         public:
-          virtual void add(BaseEvent& event) = 0; 
+          virtual void add(const BaseEvent& event) = 0; 
           class EventIterator{
             PriorityQueue<BaseEvent&>* pointer; 
             PriorityQueue<BaseEvent&>* head_list; 
             public:
-                EventIterator();
-                ~EventIterator();
+                EventIterator(){};
+                virtual ~EventIterator(){};
                 EventIterator(const EventIterator& event_iterator);
                 EventIterator& operator=(const EventIterator&);
                 EventIterator& operator++();
-                const BaseEvent& operator*();
-                friend bool operator==(const EventIterator& event_iterator1, EventIterator& event_iterator2);
-                friend bool operator!=(const EventIterator& event_iterator1, EventIterator& event_iterator2);
+                BaseEvent& operator*();
+                friend bool operator==(const EventIterator& event_iterator1, const EventIterator& event_iterator2);
+                friend bool operator!=(const EventIterator& event_iterator1, const EventIterator& event_iterator2);
                 friend class EventContainer; 
             };
             EventIterator begin(); 

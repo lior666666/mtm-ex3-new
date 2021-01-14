@@ -12,15 +12,16 @@ namespace mtm{
         pointer = (*head_list).getNext();
         return *this;
     }
-    const BaseEvent& EventContainer::EventIterator::operator*()
+    BaseEvent& EventContainer::EventIterator::operator*()
     {
-        return (*head_list).getData(); 
+        BaseEvent& temp_event = (*head_list).getData();
+        return temp_event; 
     }
-    bool operator==(const EventContainer::EventIterator& event_iterator1, EventContainer::EventIterator& event_iterator2)
+    bool operator==(const EventContainer::EventIterator& event_iterator1, const EventContainer::EventIterator& event_iterator2)
     {
         return event_iterator1.pointer == event_iterator2.pointer;
     }
-    bool operator!=(const EventContainer::EventIterator& event_iterator1, EventContainer::EventIterator& event_iterator2)
+    bool operator!=(const EventContainer::EventIterator& event_iterator1, const EventContainer::EventIterator& event_iterator2)
     {
         return event_iterator1.pointer != event_iterator2.pointer;
     }

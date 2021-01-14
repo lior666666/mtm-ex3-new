@@ -13,7 +13,7 @@ namespace mtm{
            BaseEvent& temp_event = EventType(event_date, event_name); 
            events_list.addElement(temp_event);  
         }
-        void add(BaseEvent& event) override
+        void add(const BaseEvent& event) override
         {
             throw NotSupported(); 
         }

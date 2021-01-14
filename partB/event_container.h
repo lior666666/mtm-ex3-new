@@ -1,4 +1,4 @@
-#ifndef EVENT_CONTAINER_H_
+/*#ifndef EVENT_CONTAINER_H_
 #define EVENT_CONTAINER_H_
 #include "base_event.h"
 #include "closed_event.h"
@@ -30,4 +30,4 @@ namespace mtm{
             EventContainer::EventIterator end(); 
     };
 }
-#endif
+#endif*/

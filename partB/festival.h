@@ -1,4 +1,4 @@
-#ifndef FESTIVAL_H_
+/*#ifndef FESTIVAL_H_
 #define FESTIVAL_H_
 #include "event_container.h"
 namespace mtm{
@@ -9,4 +9,4 @@ namespace mtm{
         void add(BaseEvent& event) override;
     };
 }
-#endif
+#endif*/

@@ -76,4 +76,8 @@ namespace mtm
             throw InvalidStudent();
         }
     }
+    const std::string BaseEvent::getName() const
+    {
+        return event_name;
+    }
 }

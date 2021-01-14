@@ -163,6 +163,46 @@
                     }
                 }
             }
+            void addElement(T data, PriorityQueue<T>* location)// should not call if list is empty!!! 
+            { 
+                if(location == this)
+                {
+                    PriorityQueue<T>* current_pointer = this;
+                    PriorityQueue<T>* next_pointer = current_pointer->next;
+                    PriorityQueue<T>* temp_pointer = new PriorityQueue<T>;
+                    temp_pointer->data = data; 
+                    current_pointer->next = temp_pointer;
+                    temp_pointer->next = next_pointer;
+                }
+                else if(location == NULL)
+                {
+                    PriorityQueue<T>* current_pointer = this->next;
+                    PriorityQueue<T>* next_pointer = current_pointer->next;  
+                    while(next_pointer != NULL) 
+                    {
+                       current_pointer = next_pointer; 
+                       next_pointer = next_pointer->next;  
+                    }
+                    PriorityQueue<T>* temp_pointer = new PriorityQueue<T>;
+                    temp_pointer->data = data; 
+                    current_pointer->next = temp_pointer; 
+                }
+                else
+                {
+                    PriorityQueue<T>* current_pointer = this->next;
+                    while(current_pointer != NULL)
+                    {
+                        if(current_pointer == location)
+                        {
+                            PriorityQueue<T>* temp_pointer = new PriorityQueue<T>;
+                            temp_pointer->data = data; 
+                            temp_pointer->next = current_pointer->next;
+                            current_pointer->next = temp_pointer;
+                        }
+                        current_pointer = current_pointer->next;
+                    }
+                }
+            }
             /*
             void addElement(T* data_pointer) 
             {

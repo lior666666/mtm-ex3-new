@@ -9,13 +9,11 @@
         PriorityQueue<T>* next;
         PriorityQueue<T>* iterator;
         public:
-
             PriorityQueue<T>()
             {
                 iterator = NULL;
                 next = NULL; 
             }
-
             ~PriorityQueue<T>()
             {
                 if(this->next !=NULL)
@@ -33,7 +31,6 @@
                     delete current_pointer;
                 }
             }
-
             PriorityQueue<T>(const PriorityQueue<T>& queue_to_copy)
             {
                 data = queue_to_copy.data; 
@@ -98,9 +95,8 @@
                 }
                 return *this;
             }
-
             //checks if element already in the list, true if he is false in not. 
-            bool containsElement(T data)
+            bool containsElement(const T& data)
             {
                 PriorityQueue<T>* current_pointer = next; 
                 if(current_pointer !=NULL)
@@ -116,10 +112,9 @@
                 }
                 return false;
             }
-
             //adds a new element to the list by it's priotity. return true if sucsses, false if element already in the list. 
             // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
-            void addElement(T data) 
+            void addElement(const T& data) 
             {
                 PriorityQueue<T>* current_pointer = NULL;
                 if(next == NULL) 
@@ -164,24 +159,23 @@
                             temp_pointer->data = data;  
                             temp_pointer->next = NULL; 
                             current_pointer->next = temp_pointer; 
-                        }
+                        } 
                     }
                 }
             }
-
+            /*
             void addElement(T* data_pointer) 
             {
                addElement((*data_pointer));
             }
-            
             void addElement(T& data_pointer) 
             {
                addElement((*data_pointer));
-            }
+            }*/
 
             //removes an elenemt from the list. returns true if the elemnt removed, and false if the elemnt not in the list. 
             // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
-            bool removeElement(T data)
+            bool removeElement(const T& data)
             {
                if(next != NULL)
                {
@@ -202,7 +196,7 @@
                     }
                }
                return false; 
-            }
+            }  
 
             // removes the first element in the list. 
             void removeTop()
@@ -253,7 +247,7 @@
             }
 
             // returns the size of the list. 
-            int getSize() const
+            int getSize()
             {
                 int counter = 0; 
                 PriorityQueue<T>* temp_pointer = next; 
@@ -264,7 +258,6 @@
                 }
                 return counter; 
             }
-
             friend bool operator==(const PriorityQueue<T>& queue1, const PriorityQueue<T>& queue2)
             {
                 PriorityQueue<T>* queue1_pointer = queue1.next;

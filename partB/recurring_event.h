@@ -7,11 +7,11 @@ namespace mtm{
     class RecurringEvent : public EventContainer
     {
         DateWrap first_event_date; 
-        char* event_name;
+        std::string event_name;
         int num_event_occurrences;
         int days_event_interval; 
         public:
-        RecurringEvent<EventType>(DateWrap first_date, char* name, int num_occurrences, int days_interval) : EventContainer(),first_event_date(first_date) , event_name(name), 
+        RecurringEvent<EventType>(DateWrap first_date, std::string name, int num_occurrences, int days_interval) : EventContainer(),first_event_date(first_date) , event_name(name), 
         num_event_occurrences(num_occurrences), days_event_interval(days_interval) 
         {
             if(num_event_occurrences < 1)

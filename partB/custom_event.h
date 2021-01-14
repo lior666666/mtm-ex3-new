@@ -9,7 +9,8 @@ namespace mtm{
     public:
         //#1
         //priority queue will be initialized by default constructor
-        CustomEvent(DateWrap date, char* name, CanRegister condition) : 
+        CustomEvent() = default;
+        CustomEvent(DateWrap date, std::string name, CanRegister condition) : 
             BaseEvent(date, name), register_condition(condition) {
         }
 
@@ -21,18 +22,18 @@ namespace mtm{
             {
                 throw RegistrationBlocked();
             }
-            if (!event_participants.addElement(student))
+            if (event_participants.containsElement(student))
             {
                 throw AlreadyRegistered();
             }
+            event_participants.addElement(student);
         }
 
         //#3
         BaseEvent* clone() const override
         {
             DateWrap copied_date = DateWrap(this->event_date);
-            char* copied_name = new char[strlen(this->event_name)];
-            strcpy(copied_name, this->event_name);
+            std::string copied_name = event_name;
             CustomEvent* copied_event = new CustomEvent(copied_date, copied_name, CanRegister(register_condition));
             copied_event->event_participants = *(new PriorityQueue<long>(this->event_participants));
             return copied_event;

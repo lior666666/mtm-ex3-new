@@ -3,7 +3,7 @@ namespace mtm
 {
     //#1
     //priority queue will be initialized by default constructor
-    BaseEvent::BaseEvent(DateWrap date, char* name) : 
+    BaseEvent::BaseEvent(DateWrap date, std::string name) : 
         event_name(name), event_date(date) {
     }
 
@@ -36,19 +36,36 @@ namespace mtm
     }
 
     //#6
-    //******pure virtual*****
+    const DateWrap& BaseEvent::getDate() const
+    {
+        return event_date;
+    }
 
     //#7
+    //******pure virtual*****
+
+    //#8
+    bool operator==(const BaseEvent& event1, const BaseEvent& event2)
+    {
+        return event1.event_date == event2.event_date && event1.event_name.compare(event2.event_name) == 0;
+    }
+
+    //#9
+    bool operator<(const BaseEvent& event1, const BaseEvent& event2)
+    {
+        if (event1.event_date == event2.event_date)
+        {
+            return event1.event_name.compare(event2.event_name) < 0;
+        }
+        return event1.event_date < event2.event_date;
+    }
+
+    //#10
     void isVaildStudent(const long student)
     {
         if (student < 1 || student > 1234567890)
         {
             throw InvalidStudent();
         }
-    } 
-    const DateWrap& BaseEvent::getDate() const
-    {
-        return event_date; 
     }
-
 }

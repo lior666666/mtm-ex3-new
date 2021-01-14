@@ -163,9 +163,13 @@
                     }
                 }
             }
-            bool addElement(T* data_pointer) 
+            void addElement(T* data_pointer) 
             {
-               return addElement((*data_pointer));
+               addElement((*data_pointer));
+            }
+            void addElement(T& data_pointer) 
+            {
+               addElement((*data_pointer));
             }
 
             //removes an elenemt from the list. returns true if the elemnt removed, and false if the elemnt not in the list. 
@@ -191,33 +195,7 @@
                     }
                }
                return false; 
-            }
-            //removes an elenemt from the list. returns true if the elemnt removed, and false if the elemnt not in the list. 
-            // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
-            bool removeElement(T data)
-            {
-               if(next != NULL)
-               {
-                    PriorityQueue<T>* current_pointer = this;
-                    PriorityQueue<T>* next_pointer = next;  
-                    while(next_pointer != NULL)
-                    {
-                        if(next_pointer->data == data)
-                        {  
-                            //PriorityQueue<T>* temp_pointer = next_pointer;
-                            current_pointer->next = current_pointer->next->next; 
-                            next_pointer->next = NULL;
-                            delete next_pointer;
-                            return true; 
-                        }
-                        current_pointer = next_pointer;
-                        next_pointer = current_pointer->next;
-                    }
-               }
-               return false; 
-            }
-
-            
+            }  
 
             // removes the first element in the list. 
             void removeTop()
@@ -278,6 +256,25 @@
                     temp_pointer = temp_pointer->next; 
                 }
                 return counter; 
+            }
+            friend bool operator==(const PriorityQueue<T>& queue1, const PriorityQueue<T>& queue2)
+            {
+                PriorityQueue<T>* queue1_pointer = queue1.next;
+                PriorityQueue<T>* queue2_pointer = queue2.next;
+                if (queue1.getSize() != queue2.getSize())
+                {
+                    return false;
+                }
+                while (queue1_pointer->next != NULL)
+                {
+                    if (queue1_pointer->data != queue2_pointer->data)
+                    {
+                        return false;
+                    }
+                    queue1_pointer = queue1_pointer->next;
+                    queue2_pointer = queue2_pointer->next;
+                }
+                return true;
             }
     };
     

@@ -1,4 +1,4 @@
-/*#ifndef ONE_TIME_EVENT_H
+#ifndef ONE_TIME_EVENT_H
 #define ONE_TIME_EVENT_H
 #include "event_container.h"
 namespace mtm{
@@ -10,13 +10,13 @@ namespace mtm{
         public:
         OneTimeEvent<EventType>(DateWrap date, std::string name): EventContainer(), event_date(date) ,event_name(name)
         { 
-           BaseEvent& temp_event = EventType(event_date, event_name); 
+           BaseEvent* temp_event = EventType(event_date, event_name).clone(); 
            events_list.addElement(temp_event);  
         }
-        void add(BaseEvent& event) override
+        void add(const BaseEvent& event) override
         {
             throw NotSupported(); 
         }
     };
 }
-#endif*/
+#endif

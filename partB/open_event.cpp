@@ -12,8 +12,9 @@ namespace mtm
     {
         DateWrap copied_date = DateWrap(this->event_date);
         std::string copied_name = this->event_name;
-        OpenEvent* copied_event = new OpenEvent(copied_date, copied_name);
-        copied_event->event_participants = *(new PriorityQueue<long>(this->event_participants));
+        OpenEvent* copied_event = NULL;
+        *copied_event = OpenEvent(copied_date, copied_name);
+        copied_event->event_participants = PriorityQueue<long>(this->event_participants);
         return copied_event;
     }
 }

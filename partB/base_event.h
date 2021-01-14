@@ -12,7 +12,7 @@ namespace mtm{
         DateWrap event_date;
         PriorityQueue<long> event_participants;
     public:
-        BaseEvent() = default;
+        BaseEvent() = default; 
         BaseEvent(DateWrap date, std::string name);
         virtual ~BaseEvent() {}
         virtual void registerParticipant(const long student);

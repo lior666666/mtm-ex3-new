@@ -1,4 +1,3 @@
-/*
 #ifndef RECURRING_EVENT_H
 #define RECURRING_EVENT_H
 #include "event_container.h"
@@ -24,16 +23,16 @@ namespace mtm{
                 throw InvalidInterval(); 
             }
             DateWrap temp_date = first_event_date; 
-            const BaseEvent& temp_event = EventType(temp_date, event_name);
+            BaseEvent* temp_event = EventType(temp_date, event_name).clone();
             events_list.addElement(temp_event);
             for (int i = 0; i < num_event_occurrences; i++)
             {
                 temp_date += days_event_interval; 
-                const BaseEvent& next_temp_event = EventType(temp_date, event_name);
+                BaseEvent* next_temp_event = EventType(temp_date, event_name).clone();
                 events_list.addElement(next_temp_event);
             }
         }
-        void add(BaseEvent& event) override
+        void add(const BaseEvent& event) override
         {
             throw NotSupported(); 
         }
@@ -42,4 +41,3 @@ namespace mtm{
 
 }
 #endif
-*/

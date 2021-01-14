@@ -37,8 +37,9 @@ namespace mtm{
         {
             DateWrap copied_date = DateWrap(this->event_date);
             std::string copied_name = event_name;
-            CustomEvent* copied_event = new CustomEvent(copied_date, copied_name, CanRegister(register_condition));
-            copied_event->event_participants = *(new PriorityQueue<long>(this->event_participants));
+            CustomEvent* copied_event = NULL;
+            *copied_event = CustomEvent(copied_date, copied_name, CanRegister(register_condition));
+            copied_event->event_participants = PriorityQueue<long>(this->event_participants);
             return copied_event;
         }
     };

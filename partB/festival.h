@@ -1,4 +1,4 @@
-/*#ifndef FESTIVAL_H_
+#ifndef FESTIVAL_H_
 #define FESTIVAL_H_
 #include "event_container.h"
 namespace mtm{
@@ -6,7 +6,7 @@ namespace mtm{
         DateWrap event_date; 
         public:
         Festival(DateWrap date);  
-        void add(BaseEvent& event) override;
+        void add(const BaseEvent& event) override;
     };
 }
-#endif*/
+#endif

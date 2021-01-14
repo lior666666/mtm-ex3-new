@@ -1,4 +1,4 @@
-/*#ifndef EVENT_CONTAINER_H_
+#ifndef EVENT_CONTAINER_H_
 #define EVENT_CONTAINER_H_
 #include "base_event.h"
 #include "closed_event.h"
@@ -8,13 +8,13 @@
 namespace mtm{
     class EventContainer {
         protected:
-        PriorityQueue<BaseEvent&> events_list; 
+        PriorityQueue<BaseEvent*> events_list; 
         public:
             EventContainer() = default;
-            virtual void add(BaseEvent& event) = 0;
+            virtual void add(const BaseEvent& event) = 0;
             class EventIterator{
-                PriorityQueue<BaseEvent&>* pointer; 
-                PriorityQueue<BaseEvent&>* head_list;
+                PriorityQueue<BaseEvent*>* pointer; 
+                PriorityQueue<BaseEvent*>* head_list;
             public:
                 EventIterator() = default;
                 virtual ~EventIterator(){};
@@ -30,4 +30,4 @@ namespace mtm{
             EventContainer::EventIterator end(); 
     };
 }
-#endif*/
+#endif

@@ -6,11 +6,12 @@ namespace mtm{
     class OneTimeEvent : public EventContainer 
     {
         DateWrap event_date; 
-        char* event_name; 
+        std::string event_name; 
         public:
-        OneTimeEvent<EventType>(DateWrap date, char* name): EventContainer(), event_date(date) ,event_name(name)) 
-        {   
-           events_list.addElement(EventType(event_date, event_name));  
+        OneTimeEvent<EventType>(DateWrap date, std::string name): EventContainer(), event_date(date) ,event_name(name)
+        { 
+           BaseEvent& temp_event = EventType(event_date, event_name); 
+           events_list.addElement(temp_event);  
         }
         void add(BaseEvent& event) override
         {

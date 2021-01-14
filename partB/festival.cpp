@@ -12,8 +12,8 @@ namespace mtm{
         }
         else
         {
-            BaseEvent* copy_event = event.clone(); 
-            events_list.addElement(copy_event); 
+            //BaseEvent* copy_event = event.clone(); 
+            events_list.addElement(event); 
         }
     } 
     

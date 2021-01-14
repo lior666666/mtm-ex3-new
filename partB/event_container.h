@@ -8,12 +8,12 @@
 namespace mtm{
     class EventContainer {
         protected:
-        PriorityQueue<BaseEvent> events_list; 
+        PriorityQueue<BaseEvent&> events_list; 
         public:
           virtual void add(BaseEvent& event) = 0; 
           class EventIterator{
-            PriorityQueue<BaseEvent>* pointer; 
-            PriorityQueue<BaseEvent>* head_list; 
+            PriorityQueue<BaseEvent&>* pointer; 
+            PriorityQueue<BaseEvent&>* head_list; 
             public:
                 EventIterator();
                 ~EventIterator();

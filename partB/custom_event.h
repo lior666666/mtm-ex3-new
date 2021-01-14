@@ -15,7 +15,7 @@ namespace mtm{
         }
 
         //#2
-        void registerParticipant(const long student) override
+        void registerParticipant(const long& student) override
         {
             isVaildStudent(student);
             if (!register_condition(student))

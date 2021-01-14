@@ -8,7 +8,7 @@ namespace mtm
     }
 
     //#2
-    void OpenEvent::registerParticipant(const long student)
+    void OpenEvent::registerParticipant(const long& student)
     {
         isVaildStudent(student);
         if (event_participants.containsElement(student))

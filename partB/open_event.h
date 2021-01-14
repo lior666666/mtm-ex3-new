@@ -6,8 +6,8 @@ namespace mtm{
     class OpenEvent : public BaseEvent{ 
     public:
         OpenEvent() = default;
-        OpenEvent(DateWrap date, char* name);
-        void registerParticipant(const long student) override;
+        OpenEvent(DateWrap date, std::string name);
+        ~OpenEvent() {}
         BaseEvent* clone() const override;
     };
 }

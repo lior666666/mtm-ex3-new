@@ -8,13 +8,14 @@
 namespace mtm{
     class BaseEvent{ 
     protected:
-        char* event_name;
+        std::string event_name;
         DateWrap event_date;
         PriorityQueue<long> event_participants;
     public:
         BaseEvent() = default;
-        BaseEvent(DateWrap date, char* name);
-        virtual void registerParticipant(const long student) = 0;
+        BaseEvent(DateWrap date, std::string name);
+        virtual ~BaseEvent() {}
+        virtual void registerParticipant(const long student);
         void unregisterParticipant(const long student);
         std::ostream& printShort(std::ostream& out) const;
         std::ostream& printLong(std::ostream& out) const;

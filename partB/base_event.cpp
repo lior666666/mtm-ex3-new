@@ -3,12 +3,20 @@ namespace mtm
 {
     //#1
     //priority queue will be initialized by default constructor
-    BaseEvent::BaseEvent(DateWrap date, char* name) : 
+    BaseEvent::BaseEvent(DateWrap date, std::string name) : 
         event_name(name), event_date(date) {
     }
 
     //#2
-    //******pure virtual*****
+    void BaseEvent::registerParticipant(const long student)
+    {
+        isVaildStudent(student);
+        if (event_participants.containsElement(student))
+        {
+            throw AlreadyRegistered();
+        }
+        event_participants.addElement(student);
+    }
 
     //#3
     void BaseEvent::unregisterParticipant(const long student)
@@ -47,7 +55,7 @@ namespace mtm
     //#8
     bool operator==(const BaseEvent& event1, const BaseEvent& event2)
     {
-        return event1.event_date == event2.event_date && strcmp(event1.event_name, event2.event_name) == 0;
+        return event1.event_date == event2.event_date && event1.event_name.compare(event2.event_name) == 0;
     }
 
     //#9
@@ -55,7 +63,7 @@ namespace mtm
     {
         if (event1.event_date == event2.event_date)
         {
-            return strcmp(event1.event_name, event2.event_name) < 0;
+            return event1.event_name.compare(event2.event_name) < 0;
         }
         return event1.event_date < event2.event_date;
     }

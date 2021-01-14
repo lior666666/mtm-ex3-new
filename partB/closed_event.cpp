@@ -3,7 +3,7 @@ namespace mtm
 {
     //#1
     //priority queue will be initialized by default constructor
-    ClosedEvent::ClosedEvent(DateWrap date, char* name) : 
+    ClosedEvent::ClosedEvent(DateWrap date, std::string name) : 
         BaseEvent(date, name) {
     }
 
@@ -37,8 +37,7 @@ namespace mtm
     BaseEvent* ClosedEvent::clone() const
     {
         DateWrap copied_date = DateWrap(this->event_date);
-        char* copied_name = new char[strlen(this->event_name)];
-        strcpy(copied_name, this->event_name);
+        std::string copied_name = event_name;
         ClosedEvent* copied_event = new ClosedEvent(copied_date, copied_name);
         copied_event->event_participants = *(new PriorityQueue<long>(this->event_participants));
         copied_event->event_invited = *(new PriorityQueue<long>(this->event_invited));

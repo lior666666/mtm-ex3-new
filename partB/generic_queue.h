@@ -119,12 +119,8 @@
 
             //adds a new element to the list by it's priotity. return true if sucsses, false if element already in the list. 
             // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
-            bool addElement(T data) 
+            void addElement(T data) 
             {
-                if(containsElement(data))
-                {
-                    return false; 
-                }
                 PriorityQueue<T>* current_pointer = NULL;
                 if(next == NULL) 
                 {
@@ -133,7 +129,6 @@
                     current_pointer->data = data; // assuming T has a copy constructor. 
                     current_pointer->next = NULL;
                     next = current_pointer; 
-                    return true; 
                 } 
                 else // The list not empty
                 {
@@ -146,7 +141,6 @@
                         temp_pointer->data = data; 
                         current_pointer->next = temp_pointer;
                         temp_pointer->next = next_pointer;
-                        return true; 
                     }
                     else 
                     {
@@ -160,7 +154,6 @@
                                 temp_pointer->data = data; 
                                 current_pointer->next = temp_pointer;
                                 temp_pointer->next = next_pointer;
-                                return true;  
                             }
                                 current_pointer = next_pointer;
                                 next_pointer = next_pointer->next;    
@@ -171,11 +164,19 @@
                             temp_pointer->data = data;  
                             temp_pointer->next = NULL; 
                             current_pointer->next = temp_pointer; 
-                            return true; 
-                        } 
+                        }
                     }
                 }
-                return false;
+            }
+
+            void addElement(T* data_pointer) 
+            {
+               addElement((*data_pointer));
+            }
+            
+            void addElement(T& data_pointer) 
+            {
+               addElement((*data_pointer));
             }
 
             //removes an elenemt from the list. returns true if the elemnt removed, and false if the elemnt not in the list. 

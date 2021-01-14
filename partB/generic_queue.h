@@ -96,7 +96,7 @@
                 return *this;
             }
             //checks if element already in the list, true if he is false in not. 
-            bool containsElement(const T& data)
+            bool containsElement(T data)
             {
                 PriorityQueue<T>* current_pointer = next; 
                 if(current_pointer !=NULL)
@@ -114,7 +114,7 @@
             }
             //adds a new element to the list by it's priotity. return true if sucsses, false if element already in the list. 
             // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
-            void addElement(const T& data) 
+            void addElement(T data) 
             {
                 PriorityQueue<T>* current_pointer = NULL;
                 if(next == NULL) 
@@ -175,7 +175,7 @@
 
             //removes an elenemt from the list. returns true if the elemnt removed, and false if the elemnt not in the list. 
             // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
-            bool removeElement(const T& data)
+            bool removeElement(T data)
             {
                if(next != NULL)
                {

@@ -9,7 +9,7 @@ namespace mtm
     //partA
     class NegativeDays : public Exception{};
     class InvalidDate : public Exception{}; 
-    class AllocationFailed : public Exception{};
+    class AllocationFailed : public Exception{}; // ****replace it!!!
     //partB
     class NotRegistered : public Exception{};
     class InvalidStudent : public Exception{};
@@ -21,6 +21,4 @@ namespace mtm
     class InvalidNumber : public Exception{};
     class InvalidInterval : public Exception{};
 }
-
-
 #endif

@@ -1,12 +1,6 @@
 #include "event_container.h"
 namespace mtm{
 
-    EventContainer::EventContainer(){} // made by default generic list constructor. 
-    EventContainer::EventIterator::EventIterator()
-    {
-        pointer = NULL; 
-        head_list = NULL; 
-    } 
     EventContainer::EventIterator& EventContainer::EventIterator::operator++()
     {
         pointer = (*head_list).getNext();
@@ -14,8 +8,8 @@ namespace mtm{
     }
     BaseEvent& EventContainer::EventIterator::operator*()
     {
-        BaseEvent& temp_event = (*head_list).getData();
-        return temp_event; 
+        BaseEvent* temp_event = (*head_list).getData();
+        return *temp_event; 
     }
     bool operator==(const EventContainer::EventIterator& event_iterator1, const EventContainer::EventIterator& event_iterator2)
     {

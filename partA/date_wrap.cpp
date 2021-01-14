@@ -1,14 +1,13 @@
 #include "date_wrap.h"
-
 namespace mtm
 {
     //#1
     DateWrap::DateWrap(int day, int month, int year)
     {
-        date = dateCreate(day, month, year); 
+        date = dateCreate(day, month, year);
         if(date == NULL)
         {
-            throw InvalidDate(); 
+            throw InvalidDate();
         }
     }
 
@@ -18,7 +17,7 @@ namespace mtm
         date = dateCopy(date_wrap.date);
         if(date == NULL)
         {
-            throw AllocationFailed(); 
+            throw AllocationFailed();
         }
     }
 
@@ -163,5 +162,3 @@ namespace mtm
     return operator+(date_wrap, days);
     }
 }
-
-

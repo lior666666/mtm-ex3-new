@@ -15,7 +15,10 @@ namespace mtm{
         }
 
         //#2
-        void registerParticipant(const long& student) override
+        ~CustomEvent() {}
+
+        //#3
+        void registerParticipant(const long student) override
         {
             isVaildStudent(student);
             if (!register_condition(student))
@@ -29,7 +32,7 @@ namespace mtm{
             event_participants.addElement(student);
         }
 
-        //#3
+        //#4
         BaseEvent* clone() const override
         {
             DateWrap copied_date = DateWrap(this->event_date);

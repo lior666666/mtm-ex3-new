@@ -8,17 +8,6 @@ namespace mtm
     }
 
     //#2
-    void OpenEvent::registerParticipant(const long& student)
-    {
-        isVaildStudent(student);
-        if (event_participants.containsElement(student))
-        {
-            throw AlreadyRegistered();
-        }
-        event_participants.addElement(student);
-    }
-
-    //#3
     BaseEvent* OpenEvent::clone() const
     {
         DateWrap copied_date = DateWrap(this->event_date);

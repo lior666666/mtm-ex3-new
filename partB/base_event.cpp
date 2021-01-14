@@ -8,10 +8,18 @@ namespace mtm
     }
 
     //#2
-    //******pure virtual*****
+    void BaseEvent::registerParticipant(const long student)
+    {
+        isVaildStudent(student);
+        if (event_participants.containsElement(student))
+        {
+            throw AlreadyRegistered();
+        }
+        event_participants.addElement(student);
+    }
 
     //#3
-    void BaseEvent::unregisterParticipant(const long& student)
+    void BaseEvent::unregisterParticipant(const long student)
     {
         isVaildStudent(student);
         if (!event_participants.removeElement(student))
@@ -61,7 +69,7 @@ namespace mtm
     }
 
     //#10
-    void isVaildStudent(const long& student)
+    void isVaildStudent(const long student)
     {
         if (student < 1 || student > 1234567890)
         {

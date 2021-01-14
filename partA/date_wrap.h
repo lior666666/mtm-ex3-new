@@ -20,9 +20,7 @@ namespace mtm{
         friend bool operator<(const DateWrap& date1, const DateWrap& date2);
         friend DateWrap& operator+=(DateWrap& date, int days); 
         DateWrap operator++(int);
-        
     };
-    
     DateWrap operator+(const DateWrap& date, int days);
     DateWrap operator+(int days, const DateWrap& date);
     std::ostream& operator<<(std::ostream& out, const DateWrap& date); 

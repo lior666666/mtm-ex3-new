@@ -8,7 +8,7 @@ namespace mtm
     }
 
     //#2
-    void ClosedEvent::addInvitee(const long& student)
+    void ClosedEvent::addInvitee(const long student)
     {
         isVaildStudent(student);
         if (event_invited.containsElement(student))
@@ -19,7 +19,7 @@ namespace mtm
     }
 
     //#3
-    void ClosedEvent::registerParticipant(const long& student)
+    void ClosedEvent::registerParticipant(const long student)
     {
         isVaildStudent(student);
         if (!event_invited.containsElement(student))

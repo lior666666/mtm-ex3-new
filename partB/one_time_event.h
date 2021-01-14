@@ -10,7 +10,7 @@ namespace mtm{
         public:
         OneTimeEvent<EventType>(DateWrap date, std::string name): EventContainer(), event_date(date) ,event_name(name)
         { 
-           BaseEvent& temp_event = EventType(event_date, event_name); 
+           BaseEvent* temp_event = EventType(event_date, event_name); 
            events_list.addElement(temp_event);  
         }
         void add(const BaseEvent& event) override

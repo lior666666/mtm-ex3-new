@@ -32,7 +32,7 @@ namespace mtm{
             event_participants.addElement(student);
         }
 
-        //#4
+        /*//#4
         BaseEvent* clone() const override
         {
             DateWrap copied_date = DateWrap(this->event_date);
@@ -41,6 +41,23 @@ namespace mtm{
             *copied_event = CustomEvent(copied_date, copied_name, CanRegister(register_condition));
             copied_event->event_participants = PriorityQueue<long>(this->event_participants);
             return copied_event;
+        }*/
+
+        const CanRegister getRegisterCondition() const
+        {
+            return register_condition;
+        }
+
+        CustomEvent(const CustomEvent& event) : 
+            BaseEvent(event),register_condition(event.register_condition)
+        {
+
+        }
+
+        //#2
+        BaseEvent* clone() const
+        {
+            return new CustomEvent(*this);
         }
     };
 }

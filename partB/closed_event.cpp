@@ -33,7 +33,7 @@ namespace mtm
         event_participants.addElement(student);
     }
 
-    //#4
+    /*//#4
     BaseEvent* ClosedEvent::clone() const
     {
         DateWrap copied_date = DateWrap(this->event_date);
@@ -43,5 +43,34 @@ namespace mtm
         copied_event->event_participants = PriorityQueue<long>(this->event_participants);
         copied_event->event_invited = PriorityQueue<long>(this->event_invited);
         return copied_event;
+    }*/
+
+    /*ClosedEvent& ClosedEvent::operator=(const ClosedEvent& event)
+    {
+        if (this == &event) {
+		    return *this;
+        }
+        event_name = event.getName();
+        event_date = event.getDate();
+        event_participants = event.getParticipants();
+        event_invited = event.getInvited();
+        return *this;
+    }*/
+
+    //#8
+    const PriorityQueue<long> ClosedEvent::getInvited() const
+    {
+        return event_invited;
+    }
+
+    ClosedEvent::ClosedEvent(const ClosedEvent& event) : 
+        BaseEvent(event), event_invited(PriorityQueue<long>(event.event_invited)) 
+    {
+    }
+
+    //#2
+    BaseEvent* ClosedEvent::clone() const
+    {
+        return new ClosedEvent(*this);
     }
 }

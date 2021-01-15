@@ -1,6 +1,19 @@
 #include "event_container.h"
 namespace mtm{
+    EventContainer::EventIterator::EventIterator(const EventIterator& event_iterator) :
+        pointer(event_iterator.pointer), head_list(event_iterator.head_list)
+    {
 
+    }
+    EventContainer::EventIterator& EventContainer::EventIterator::operator=(const EventIterator& iterator)
+    {
+        if (this == &iterator) {
+            return *this;
+        }
+        pointer = iterator.pointer;
+        head_list = iterator.head_list;
+        return *this;
+    }
     EventContainer::EventIterator& EventContainer::EventIterator::operator++()
     {
         pointer = (*head_list).getNext();

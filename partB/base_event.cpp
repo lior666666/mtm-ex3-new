@@ -4,12 +4,13 @@ namespace mtm
     //#1
     //priority queue will be initialized by default constructor
     BaseEvent::BaseEvent(DateWrap date, std::string name) : 
-        event_name(name), event_date(date) {
+        event_name(std::string(name)), event_date(DateWrap(date)) {
     }
 
     BaseEvent::BaseEvent(const BaseEvent& event) : 
-        event_name(event.getName()), event_date(DateWrap(event.getDate())), 
-        event_participants(PriorityQueue<long>(event.getParticipants())) {
+        event_name(event.event_name), event_date(DateWrap(event.event_date)), 
+        event_participants(PriorityQueue<long>(event.event_participants)) 
+        {
     }
 
     //#2
@@ -55,7 +56,7 @@ namespace mtm
     }
 
     //#7
-    std::string BaseEvent::getName() const
+    const std::string BaseEvent::getName() const
     {
         return event_name;
     }

@@ -21,7 +21,7 @@ namespace mtm{
         std::ostream& printShort(std::ostream& out) const;
         std::ostream& printLong(std::ostream& out) const;
         const DateWrap& getDate() const;
-        std::string getName() const;
+        const std::string getName() const;
         const PriorityQueue<long> getParticipants() const;
         virtual BaseEvent* clone() const = 0;
         friend bool operator==(const BaseEvent& event1, const BaseEvent& event2);

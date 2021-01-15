@@ -11,8 +11,9 @@ namespace mtm{
         int num_event_occurrences;
         int days_event_interval; 
         public:
-        RecurringEvent<EventType>(DateWrap first_date, std::string name, int num_occurrences, int days_interval) : EventContainer(),first_event_date(first_date) , event_name(name), 
-        num_event_occurrences(num_occurrences), days_event_interval(days_interval) 
+        RecurringEvent<EventType>(DateWrap first_date, std::string name, int num_occurrences, int days_interval) : 
+            EventContainer(),first_event_date(first_date) , event_name(name), 
+            num_event_occurrences(num_occurrences), days_event_interval(days_interval) 
         {
             if(num_event_occurrences < 1)
             {
@@ -24,12 +25,23 @@ namespace mtm{
             }
             DateWrap temp_date = first_event_date; 
             events_list.addElement(EventType(temp_date, event_name).clone());
-            for (int i = 0; i < num_event_occurrences; i++)
+            for (int i = 1; i < num_event_occurrences; i++)
             {
                 temp_date += days_event_interval;
                 events_list.addElement(EventType(temp_date, event_name).clone(), NULL);
             }
         }
+        ~RecurringEvent<EventType>()
+        {
+            PriorityQueue<BaseEvent*>* current_pointer = events_list.getIterator();
+            BaseEvent* pointer; 
+            while(current_pointer != NULL)
+            {
+                pointer = events_list.popTop();
+                delete pointer; 
+                current_pointer = events_list.getIterator();
+            }
+        } 
         void add(const BaseEvent& event) override
         {
             throw NotSupported(); 

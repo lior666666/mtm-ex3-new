@@ -240,17 +240,24 @@
                return false; 
             }  
 
-            // removes the first element in the list. 
-            void removeTop()
+            // removes the first element in the list and returns it.
+            T popTop()
             {
+                 T value;
                 if(next != NULL)
                 {
+                    value = next->data; 
                     PriorityQueue<T>* current_pointer = this;
                     PriorityQueue<T>* next_pointer = next;
                     current_pointer->next = current_pointer->next->next; 
                     next_pointer->next = NULL;
                     delete next_pointer; 
                 }
+                else
+                {
+                   value = NULL; 
+                }
+                return value; 
             }
 
             // nitialize the iterator to the top of the list and return it. 
@@ -261,7 +268,7 @@
             }
 
             //returns the data of the current elemnt.      
-            T& getData()
+            T getData()
             {
                 return iterator->data;
             }

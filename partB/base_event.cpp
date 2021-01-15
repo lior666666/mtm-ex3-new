@@ -50,15 +50,27 @@ namespace mtm
     }
 
     //#7
-    //******pure virtual*****
+    const std::string BaseEvent::getName() const
+    {
+        return event_name;
+    }
 
     //#8
+    const PriorityQueue<long> BaseEvent::getParticipants() const
+    {
+        return event_participants;
+    }
+
+    //#9
+    //******pure virtual*****
+
+    //#10
     bool operator==(const BaseEvent& event1, const BaseEvent& event2)
     {
         return event1.event_date == event2.event_date && event1.event_name.compare(event2.event_name) == 0;
     }
 
-    //#9
+    //#11
     bool operator<(const BaseEvent& event1, const BaseEvent& event2)
     {
         if (event1.event_date == event2.event_date)
@@ -68,7 +80,7 @@ namespace mtm
         return event1.event_date < event2.event_date;
     }
 
-    //#10
+    //#12
     void isVaildStudent(const long student)
     {
         if (student < 1 || student > 1234567890)

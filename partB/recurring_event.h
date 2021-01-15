@@ -23,13 +23,11 @@ namespace mtm{
                 throw InvalidInterval(); 
             }
             DateWrap temp_date = first_event_date; 
-            BaseEvent* temp_event = EventType(temp_date, event_name).clone();
-            events_list.addElement(temp_event);
+            events_list.addElement(EventType(temp_date, event_name).clone());
             for (int i = 0; i < num_event_occurrences; i++)
             {
-                temp_date += days_event_interval; 
-                BaseEvent* next_temp_event = EventType(temp_date, event_name).clone();
-                events_list.addElement(next_temp_event);
+                temp_date += days_event_interval;
+                events_list.addElement(EventType(temp_date, event_name).clone(), NULL);
             }
         }
         void add(const BaseEvent& event) override

@@ -7,6 +7,17 @@ namespace mtm
         BaseEvent(date, name) {
     }
 
+    OpenEvent& OpenEvent::operator=(const OpenEvent& event)
+    {
+        if (this == &event) {
+		    return *this;
+        }
+        event_name.assign((std::string)event.getName());
+        event_date = event.getDate();
+        event_participants = event.getParticipants();
+        return *this;
+    }
+
     //#2
     BaseEvent* OpenEvent::clone() const
     {

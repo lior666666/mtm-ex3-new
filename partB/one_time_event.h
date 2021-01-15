@@ -12,6 +12,17 @@ namespace mtm{
         { 
             events_list.addElement(EventType(event_date, event_name).clone()); 
         }
+        ~ OneTimeEvent<EventType>()
+        {
+            PriorityQueue<BaseEvent*>* current_pointer = events_list.getIterator();
+            BaseEvent* pointer; 
+            while(current_pointer != NULL)
+            {
+                pointer = events_list.popTop();
+                delete pointer; 
+                current_pointer = events_list.getIterator();
+            } 
+        }
         void add(const BaseEvent& event) override
         {
             throw NotSupported(); 

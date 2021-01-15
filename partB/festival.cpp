@@ -4,7 +4,17 @@ namespace mtm{
     // I added a default date constructor, so it's should work 
     Festival::Festival(DateWrap date): EventContainer(), event_date(date)
     {}
-
+     Festival::~Festival()
+     {
+        PriorityQueue<BaseEvent*>* current_pointer = events_list.getIterator();
+        BaseEvent* pointer; 
+        while(current_pointer != NULL)
+        {
+            pointer = events_list.popTop();
+            delete pointer; 
+            current_pointer = events_list.getIterator();
+        }
+     }
     void Festival::add(const BaseEvent& event)
     {
         if(event.getDate() != event_date)

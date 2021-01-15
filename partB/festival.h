@@ -5,6 +5,7 @@ namespace mtm{
     class Festival : public EventContainer{
         DateWrap event_date; 
         public:
+        ~Festival();
         Festival(DateWrap date);  
         void add(const BaseEvent& event) override;
     };

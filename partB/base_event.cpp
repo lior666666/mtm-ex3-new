@@ -7,6 +7,11 @@ namespace mtm
         event_name(name), event_date(date) {
     }
 
+    BaseEvent::BaseEvent(const BaseEvent& event) : 
+        event_name(event.getName()), event_date(DateWrap(event.getDate())), 
+        event_participants(PriorityQueue<long>(event.getParticipants())) {
+    }
+
     //#2
     void BaseEvent::registerParticipant(const long student)
     {
@@ -50,7 +55,7 @@ namespace mtm
     }
 
     //#7
-    const std::string BaseEvent::getName() const
+    std::string BaseEvent::getName() const
     {
         return event_name;
     }

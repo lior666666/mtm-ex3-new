@@ -12,7 +12,7 @@ namespace mtm
         if (this == &event) {
 		    return *this;
         }
-        event_name.assign((std::string)event.getName());
+        event_name = event.getName();
         event_date = event.getDate();
         event_participants = event.getParticipants();
         return *this;
@@ -21,11 +21,11 @@ namespace mtm
     //#2
     BaseEvent* OpenEvent::clone() const
     {
-        DateWrap copied_date = DateWrap(this->event_date);
-        std::string copied_name = this->event_name;
+        /*DateWrap copied_date = DateWrap(this->event_date);
         OpenEvent* copied_event = NULL;
-        *copied_event = OpenEvent(copied_date, copied_name);
+        *copied_event = OpenEvent(copied_date, this->event_name);
         copied_event->event_participants = PriorityQueue<long>(this->event_participants);
-        return copied_event;
+        return copied_event;*/
+        return new OpenEvent(*this);
     }
 }

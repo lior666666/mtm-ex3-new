@@ -14,6 +14,7 @@ namespace mtm{
     public:
         BaseEvent() = default;
         BaseEvent(DateWrap date, std::string name);
+        BaseEvent(const BaseEvent& event);
         virtual ~BaseEvent() {}
         virtual void registerParticipant(const long student);
         void unregisterParticipant(const long student);

@@ -13,10 +13,10 @@ namespace mtm{
         CustomEvent(DateWrap date, std::string name, CanRegister condition) : 
             BaseEvent(date, name), register_condition(condition) {
         }
-
         //#2
         ~CustomEvent() {}
-
+        CustomEvent(const CustomEvent& event):BaseEvent(event),register_condition(event.register_condition)
+        {}
         //#3
         void registerParticipant(const long student) override
         {
@@ -31,15 +31,18 @@ namespace mtm{
             }
             event_participants.addElement(student);
         }
-
         //#4
         BaseEvent* clone() const override
         {
+            /*
             DateWrap copied_date = DateWrap(this->event_date);
             std::string copied_name = event_name;
-            CustomEvent* copied_event = new CustomEvent(copied_date, copied_name, CanRegister(register_condition));
-            copied_event->event_participants = *(new PriorityQueue<long>(this->event_participants));
-            return copied_event;
+            CustomEvent* copied_event = NULL;
+            *copied_event = CustomEvent(copied_date, copied_name, CanRegister(register_condition));
+            copied_event->event_participants = PriorityQueue<long>(this->event_participants);
+            return copied_event;*/
+            
+            return new CustomEvent(*this);
         }
     };
 }

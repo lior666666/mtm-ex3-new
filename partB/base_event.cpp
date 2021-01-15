@@ -6,7 +6,11 @@ namespace mtm
     BaseEvent::BaseEvent(DateWrap date, std::string name) : 
         event_name(name), event_date(date) {
     }
-
+    BaseEvent::BaseEvent(const BaseEvent& event) : 
+        event_name(event.event_name), event_date(DateWrap(event.event_date)), 
+        event_participants(PriorityQueue<long>(event.event_participants)) 
+        {
+    }
     //#2
     void BaseEvent::registerParticipant(const long student)
     {

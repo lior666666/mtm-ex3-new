@@ -6,10 +6,10 @@ namespace mtm
     ClosedEvent::ClosedEvent(DateWrap date, std::string name) : 
         BaseEvent(date, name) {
     }
-    ClosedEvent::ClosedEvent(const ClosedEvent& event) : BaseEvent(event), event_invited(PriorityQueue<long>(event.event_invited)) 
+    ClosedEvent::ClosedEvent(const ClosedEvent& event) : BaseEvent(event), event_invited(PriorityQueue<int>(event.event_invited)) 
         {}
     //#2
-    void ClosedEvent::addInvitee(const long student)
+    void ClosedEvent::addInvitee(const int student)
     {
         isVaildStudent(student);
         if (event_invited.containsElement(student))
@@ -20,7 +20,7 @@ namespace mtm
     }
 
     //#3
-    void ClosedEvent::registerParticipant(const long student)
+    void ClosedEvent::registerParticipant(const int student)
     {
         isVaildStudent(student);
         if (!event_invited.containsElement(student))
@@ -42,8 +42,8 @@ namespace mtm
         std::string copied_name = event_name;
         ClosedEvent* copied_event = NULL;
         *copied_event = ClosedEvent(copied_date, copied_name);
-        copied_event->event_participants = PriorityQueue<long>(this->event_participants);
-        copied_event->event_invited = PriorityQueue<long>(this->event_invited);
+        copied_event->event_participants = PriorityQueue<int>(this->event_participants);
+        copied_event->event_invited = PriorityQueue<int>(this->event_invited);
         return copied_event;*/
         return new ClosedEvent(*this);
     }

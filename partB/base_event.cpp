@@ -7,12 +7,13 @@ namespace mtm
         event_name(name), event_date(date) {
     }
     BaseEvent::BaseEvent(const BaseEvent& event) : 
-        event_name(event.event_name), event_date(DateWrap(event.event_date)), 
-        event_participants(PriorityQueue<long>(event.event_participants)) 
+        event_date(DateWrap(event.event_date)), 
+        event_participants(PriorityQueue<int>(event.event_participants)) 
         {
-    }
+            event_name = event.event_name;
+        }
     //#2
-    void BaseEvent::registerParticipant(const long student)
+    void BaseEvent::registerParticipant(const int student)
     {
         isVaildStudent(student);
         if (event_participants.containsElement(student))
@@ -23,7 +24,7 @@ namespace mtm
     }
 
     //#3
-    void BaseEvent::unregisterParticipant(const long student)
+    void BaseEvent::unregisterParticipant(const int student)
     {
         isVaildStudent(student);
         if (!event_participants.removeElement(student))
@@ -73,7 +74,7 @@ namespace mtm
     }
 
     //#10
-    void isVaildStudent(const long student)
+    void isVaildStudent(const int student)
     {
         if (student < 1 || student > 1234567890)
         {

@@ -10,14 +10,14 @@ namespace mtm{
     protected:
         std::string event_name;
         DateWrap event_date;
-        PriorityQueue<long> event_participants;
+        PriorityQueue<int> event_participants;
     public:
         BaseEvent() = default;
         BaseEvent(DateWrap date, std::string name);
         BaseEvent(const BaseEvent& event);
         virtual ~BaseEvent() {}
-        virtual void registerParticipant(const long student);
-        void unregisterParticipant(const long student);
+        virtual void registerParticipant(const int student);
+        void unregisterParticipant(const int student);
         std::ostream& printShort(std::ostream& out) const;
         std::ostream& printLong(std::ostream& out) const;
         const DateWrap& getDate() const;
@@ -26,6 +26,6 @@ namespace mtm{
         friend bool operator==(const BaseEvent& event1, const BaseEvent& event2);
         friend bool operator<(const BaseEvent& event1, const BaseEvent& event2);
     };
-    void isVaildStudent(const long student);
+    void isVaildStudent(const int student);
 }
 #endif

@@ -24,7 +24,7 @@ namespace mtm{
             }
             DateWrap temp_date = first_event_date; 
             events_list.addElement(EventType(temp_date, event_name).clone());
-            for (int i = 0; i < num_event_occurrences; i++)
+            for (int i = 1; i < num_event_occurrences; i++)
             {
                 temp_date += days_event_interval;
                 events_list.addElement(EventType(temp_date, event_name).clone(), NULL);

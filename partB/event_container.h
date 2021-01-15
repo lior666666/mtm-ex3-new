@@ -11,6 +11,7 @@ namespace mtm{
         PriorityQueue<BaseEvent*> events_list; 
         public:
             EventContainer() = default;
+            virtual ~EventContainer(){};
             virtual void add(const BaseEvent& event) = 0;
             class EventIterator{
                 PriorityQueue<BaseEvent*>* pointer; 

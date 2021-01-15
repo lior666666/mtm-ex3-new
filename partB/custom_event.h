@@ -18,7 +18,7 @@ namespace mtm{
         CustomEvent(const CustomEvent& event):BaseEvent(event),register_condition(event.register_condition)
         {}
         //#3
-        void registerParticipant(const long student) override
+        void registerParticipant(const int student) override
         {
             isVaildStudent(student);
             if (!register_condition(student))
@@ -39,7 +39,7 @@ namespace mtm{
             std::string copied_name = event_name;
             CustomEvent* copied_event = NULL;
             *copied_event = CustomEvent(copied_date, copied_name, CanRegister(register_condition));
-            copied_event->event_participants = PriorityQueue<long>(this->event_participants);
+            copied_event->event_participants = PriorityQueue<int>(this->event_participants);
             return copied_event;*/
             
             return new CustomEvent(*this);

@@ -9,6 +9,7 @@
         PriorityQueue<T>* next;
         PriorityQueue<T>* iterator;
         public:
+    
             PriorityQueue<T>()
             {
                 iterator = NULL;

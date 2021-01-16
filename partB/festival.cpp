@@ -5,8 +5,8 @@ namespace mtm{
     Festival::Festival(DateWrap date): EventContainer(), event_date(date)
     {}
 
-     Festival::~Festival()
-     {
+    Festival::~Festival()
+    {
         PriorityQueue<BaseEvent*>* current_pointer = events_list.getIterator();
         BaseEvent* pointer; 
         while(current_pointer != NULL)

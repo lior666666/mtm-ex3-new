@@ -20,5 +20,7 @@ namespace mtm
     class DateMismatch : public Exception{};
     class InvalidNumber : public Exception{};
     class InvalidInterval : public Exception{};
+    //partC
+    class EventAlreadyExists : public Exception{};
 }
 #endif

@@ -1,5 +1,20 @@
 #include "event_container.h"
 namespace mtm{
+    EventContainer::EventContainer(const EventContainer& container) 
+    {
+
+        PriorityQueue<BaseEvent*> container_list = container.events_list;
+        PriorityQueue<BaseEvent*>* current_pointer = container_list.getIterator();
+        BaseEvent* new_event = container_list.getData()->clone(); 
+        events_list.addElement(new_event); // for the first element when list is still empty we need to use the first type function. 
+        current_pointer = container_list.getNext();
+        while(current_pointer!=NULL)
+        {
+            BaseEvent* new_next_event = container_list.getData()->clone(); 
+            events_list.addElement(new_next_event);
+            current_pointer = container_list.getNext();
+        }
+    }
     EventContainer::EventIterator::EventIterator(const EventIterator& event_iterator) :
         pointer(event_iterator.pointer), head_list(event_iterator.head_list)
     {
@@ -46,4 +61,8 @@ namespace mtm{
         temp.head_list = &events_list; 
         return temp;   
     }
+    void EventContainer::add(const BaseEvent& event)
+        {
+            throw NotSupported(); 
+        }
 }

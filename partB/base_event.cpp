@@ -77,16 +77,21 @@ namespace mtm
     }
 
     //#11
-    bool operator<(const BaseEvent& event1, const BaseEvent& event2)
+    bool BaseEvent::isSmaller(BaseEvent* event2)
     {
-        if (event1.event_date == event2.event_date)
+        if (event_date == event2->event_date)
         {
-            return event1.event_name.compare(event2.event_name) < 0;
+            return event_name.compare(event2->event_name) < 0;
         }
-        return event1.event_date < event2.event_date;
+        return event_date < event2->event_date;
+    }
+    //#12
+    bool BaseEvent::isEqual(BaseEvent* event2)
+    {
+        return event_date == event2->event_date && event_name.compare(event2->event_name) == 0; 
     }
 
-    //#12
+    //#13
     void isVaildStudent(const long student)
     {
         if (student < 1 || student > 1234567890)

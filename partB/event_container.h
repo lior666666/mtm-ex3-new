@@ -11,8 +11,9 @@ namespace mtm{
         PriorityQueue<BaseEvent*> events_list; 
         public:
             EventContainer() = default;
+            EventContainer(const EventContainer& container);
+            virtual void add(const BaseEvent& event);
             virtual ~EventContainer() {}
-            virtual void add(const BaseEvent& event) = 0;
             class EventIterator{
                 PriorityQueue<BaseEvent*>* pointer; 
                 PriorityQueue<BaseEvent*>* head_list;
@@ -29,6 +30,7 @@ namespace mtm{
             };
             EventContainer::EventIterator begin();
             EventContainer::EventIterator end(); 
+            virtual EventContainer* clone() const = 0;
     };
 }
 #endif

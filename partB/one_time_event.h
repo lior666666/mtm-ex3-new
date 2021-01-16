@@ -14,18 +14,15 @@ namespace mtm{
         }
         ~OneTimeEvent<EventType>()
         {
-            PriorityQueue<BaseEvent*>* current_pointer = events_list.getIterator();
             BaseEvent* pointer; 
-            while(current_pointer != NULL)
-            {
-                pointer = events_list.popTop();
-                delete pointer; 
-                current_pointer = events_list.getIterator();
-            } 
+            pointer = events_list.popTop();
+            delete pointer; 
         }
-        void add(const BaseEvent& event) override
+        OneTimeEvent<EventType>(const  OneTimeEvent<EventType>& container): EventContainer(container), event_date(container.event_date),event_name(container.event_name)
+        {}
+        EventContainer* clone() const
         {
-            throw NotSupported(); 
+            return new OneTimeEvent(*this);
         }
     };
 }

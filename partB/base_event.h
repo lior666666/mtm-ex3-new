@@ -25,7 +25,8 @@ namespace mtm{
         const PriorityQueue<long> getParticipants() const;
         virtual BaseEvent* clone() const = 0;
         friend bool operator==(const BaseEvent& event1, const BaseEvent& event2);
-        friend bool operator<(const BaseEvent& event1, const BaseEvent& event2);
+        bool isSmaller(BaseEvent* event2);
+        bool isEqual(BaseEvent* event2);
     };
     void isVaildStudent(const long student);
 }

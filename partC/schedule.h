@@ -11,7 +11,7 @@ namespace mtm{
         ~Schedule();
         BaseEvent* findEvent(const DateWrap date, const std::string name) const;
         void addEvents(const EventContainer& event_container);
-        bool isContains(EventContainer& event_container); 
+        bool isContains(EventContainer* event_container); 
         void registerToEvent(const DateWrap date, const std::string name, const long student);
         void unregisterFromEvent(const DateWrap date, const std::string name, const long student);
         void printAllEvents() const;

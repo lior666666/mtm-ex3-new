@@ -20,7 +20,7 @@ namespace mtm{
         while (event_pointer != NULL)
         {
             BaseEvent* current_event = temp.getData();
-            if (current_event->getName() == name && current_event->getDate() == date)
+            if (current_event->getName().compare(name) == 0 && current_event->getDate() == date)
             {
                 return current_event;
             }
@@ -30,10 +30,10 @@ namespace mtm{
         return NULL; 
     }
 
-    bool Schedule::isContains(EventContainer& event_container)
+    bool Schedule::isContains(EventContainer* event_container)
     {
-        EventContainer::EventIterator temp_pointer = event_container.begin();
-        EventContainer::EventIterator ending = event_container.end();
+        EventContainer::EventIterator temp_pointer = event_container->begin();
+        EventContainer::EventIterator ending = event_container->end();
         while (temp_pointer != ending)
         {
             PriorityQueue<BaseEvent*>* current_schedule_pointer = events_board.getIterator();
@@ -45,6 +45,7 @@ namespace mtm{
                     throw EventAlreadyExists();
                     return true; 
                 }
+                current_schedule_pointer = events_board.getNext();
             }
             ++temp_pointer;
         }
@@ -54,7 +55,7 @@ namespace mtm{
     void Schedule::addEvents(const EventContainer& event_container_main)
     {
         EventContainer* event_container = event_container_main.clone();
-        if(!isContains(*event_container))
+        if(!isContains(event_container))
         {
             EventContainer::EventIterator event_pointer = event_container->begin();
             EventContainer::EventIterator ending = event_container->end();

@@ -23,5 +23,7 @@ namespace mtm
     //partC
     class EventAlreadyExists : public Exception{};
     class EventDoesNotExist : public Exception{};
+    //dry
+    class BadInput : public Exception{};
 }
 #endif

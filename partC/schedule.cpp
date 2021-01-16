@@ -51,13 +51,13 @@ namespace mtm{
         return false; 
     }   
 
-    void Schedule::addEvents(const EventContainer& event_container)
+    void Schedule::addEvents(const EventContainer& event_container_main)
     {
-        //EventContainer* event_container = event_container_main;
-        if(!isContains(event_container))
+        EventContainer* event_container = event_container_main.clone();
+        if(!isContains(*event_container))
         {
-            EventContainer::EventIterator event_pointer = event_container.begin();
-            EventContainer::EventIterator ending = event_container.end();
+            EventContainer::EventIterator event_pointer = event_container->begin();
+            EventContainer::EventIterator ending = event_container->end();
             while (event_pointer != ending)
             {
                 PriorityQueue<BaseEvent*>* current_schedule_pointer = events_board.getIterator(); 
@@ -96,6 +96,7 @@ namespace mtm{
                 ++event_pointer;
             }
         }
+        delete event_container; 
     }
 
     void Schedule::registerToEvent(const DateWrap date, const std::string name, const long student)

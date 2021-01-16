@@ -42,9 +42,12 @@ namespace mtm{
                 current_pointer = events_list.getIterator();
             }
         } 
-        void add(const BaseEvent& event) override
+        RecurringEvent<EventType>(const RecurringEvent<EventType>& container): EventContainer(container), first_event_date(container.first_event_date), 
+        event_name(container.event_name),num_event_occurrences(container.num_event_occurrences),days_event_interval(container.days_event_interval)
+        {}
+        EventContainer* clone() const
         {
-            throw NotSupported(); 
+            return new RecurringEvent(*this);
         }
 
     };

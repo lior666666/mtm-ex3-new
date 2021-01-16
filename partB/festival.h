@@ -7,7 +7,9 @@ namespace mtm{
         public:
         Festival(DateWrap date);  
         ~Festival();
+        Festival(const Festival& container);
         void add(const BaseEvent& event) override;
+        EventContainer* clone() const override;
     };
 }
 #endif

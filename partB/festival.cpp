@@ -16,7 +16,8 @@ namespace mtm{
             current_pointer = events_list.getIterator();
         }
      }
-
+    Festival::Festival(const Festival& container): EventContainer(container), event_date(container.event_date)
+    {}
     void Festival::add(const BaseEvent& event)
     {
         if(event.getDate() != event_date)
@@ -59,5 +60,10 @@ namespace mtm{
             }
         }
     } 
+    
+    EventContainer* Festival::clone() const
+    {
+        return new Festival(*this);
+    }
     
 }

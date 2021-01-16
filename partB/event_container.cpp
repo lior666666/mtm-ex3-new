@@ -1,5 +1,7 @@
 #include "event_container.h"
 namespace mtm{
+    EventContainer::EventContainer(const EventContainer& container): events_list(container.events_list) 
+    {}
     EventContainer::EventIterator::EventIterator(const EventIterator& event_iterator) :
         pointer(event_iterator.pointer), head_list(event_iterator.head_list)
     {
@@ -46,4 +48,8 @@ namespace mtm{
         temp.head_list = &events_list; 
         return temp;   
     }
+    void EventContainer::add(const BaseEvent& event)
+        {
+            throw NotSupported(); 
+        }
 }

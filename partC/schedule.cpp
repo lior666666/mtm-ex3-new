@@ -13,8 +13,47 @@ namespace mtm{
             current_pointer = events_board.getIterator();
         } 
     }
-    void Schedule::addEvents(EventContainer& event_container)
+    BaseEvent* Schedule::findEvent(const DateWrap date, const std::string name) const
     {
+        PriorityQueue<BaseEvent*> temp = events_board; // because it's const we had to make a temp copy. 
+        PriorityQueue<BaseEvent*>* event_pointer = temp.getIterator();
+        while (event_pointer != NULL)
+        {
+            BaseEvent* current_event = temp.getData();
+            if (current_event->getName() == name && current_event->getDate() == date)
+            {
+                return current_event;
+            }
+            event_pointer = temp.getNext();
+        }
+        throw EventDoesNotExist();
+        return NULL; 
+    }
+
+    bool Schedule::isContains(EventContainer& event_container)
+    {
+        EventContainer::EventIterator temp_pointer = event_container.begin();
+        EventContainer::EventIterator ending = event_container.end();
+        while (temp_pointer != ending)
+        {
+            PriorityQueue<BaseEvent*>* current_schedule_pointer = events_board.getIterator();
+            BaseEvent& event = *temp_pointer; 
+            while(current_schedule_pointer !=NULL)
+            {
+                if (event.isEqual(events_board.getData()))
+                {
+                    throw EventAlreadyExists();
+                    return true; 
+                }
+            }
+            ++temp_pointer;
+        }
+        return false; 
+    }   
+
+    void Schedule::addEvents(const EventContainer& event_container)
+    {
+        //EventContainer* event_container = event_container_main;
         if(!isContains(event_container))
         {
             EventContainer::EventIterator event_pointer = event_container.begin();
@@ -58,24 +97,60 @@ namespace mtm{
             }
         }
     }
-    bool Schedule::isContains(EventContainer& event_container)
+
+    void Schedule::registerToEvent(const DateWrap date, const std::string name, const long student)
     {
-        EventContainer::EventIterator temp_pointer = event_container.begin();
-        EventContainer::EventIterator ending = event_container.end();
-        while (temp_pointer != ending)
+        BaseEvent* needed_event = findEvent(date, name);
+        if(needed_event != NULL) // MAYBEE WE CAN REMOVE THAT SINCE WE THROWING AN EXECPTION IN FIND EVENT. 
         {
-            PriorityQueue<BaseEvent*>* current_schedule_pointer = events_board.getIterator();
-            BaseEvent& event = *temp_pointer; 
-            while(current_schedule_pointer !=NULL)
-            {
-                if (event.isEqual(events_board.getData()))
-                {
-                    throw EventAlreadyExists();
-                    return true; 
-                }
-            }
-            ++temp_pointer;
+            needed_event->registerParticipant(student);
         }
-        return false; 
-    }    
+    }
+
+    void Schedule::unregisterFromEvent(const DateWrap date, const std::string name, const long student)
+    {
+        BaseEvent* needed_event = findEvent(date, name);
+        if(needed_event != NULL) // MAYBEE WE CAN REMOVE THAT SINCE WE THROWING AN EXECPTION IN FIND EVENT. 
+        {
+            needed_event->unregisterParticipant(student);
+        }
+    }
+    
+    void Schedule::printAllEvents() const
+    {
+        PriorityQueue<BaseEvent*> temp = events_board; // because it's const we had to make a temp copy. 
+        PriorityQueue<BaseEvent*>* event_pointer = temp.getIterator();
+        while (event_pointer != NULL)
+        {
+            BaseEvent* current_event = temp.getData();
+            current_event->printShort(std::cout);
+            std::cout << std::endl;
+            event_pointer = temp.getNext();
+        }
+    }
+
+    void Schedule::printMonthEvents(const int month, const int year) const
+    {
+        PriorityQueue<BaseEvent*> temp = events_board; // because it's const we had to make a temp copy. 
+        PriorityQueue<BaseEvent*>* event_pointer = temp.getIterator();
+        while (event_pointer != NULL)
+        {
+            BaseEvent* current_event = temp.getData();
+            DateWrap date = current_event->getDate();
+            if(date.month() == month && date.year() == year)
+            {
+                current_event->printShort(std::cout);
+                std::cout << std::endl;
+            }
+            event_pointer =temp.getNext();
+        }
+    }
+
+    void Schedule::printEventDetails(const DateWrap date, const std::string name) const
+    {
+        BaseEvent* needed_event = findEvent(date, name);
+        needed_event->printLong(std::cout);
+        std::cout << std::endl;
+    }
+
 }

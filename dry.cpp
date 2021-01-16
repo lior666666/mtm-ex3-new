@@ -1,5 +1,8 @@
 #include "partA/exceptions.h"
 #include <vector>
+#include <iostream>
+#include <memory>
+
 namespace mtm{
     template <typename T>
     std::vector<T> slice(std::vector<T> vec, int start, int step, int stop)
@@ -22,51 +25,15 @@ namespace mtm{
     }
 }
 
-//*****************************first version - with smart pointers*****************//
-/*template<typename T>
-class smart_ptr {
-	T* data;
-    public:	typedef T element_type;
-         smart_ptr(T* ptr = NULL) : data(ptr) {}
-        ~smart_ptr() {	delete data;	}
-        T& operator*() const {	return *data; }
-        T* operator->() const { return data;}
-        smart_ptr(smart_ptr& other) : data(NULL)
-        {
-            if (other.data)
-            { 
-                this->data = other.data; 
-                other.data = NULL;
-            }
-        }
-};
-
-
 class A {
     public:
-        std::vector<smart_ptr<int>> values;
+        std::vector<std::shared_ptr<int>> values;
         void add(int x)
         {
-            smart_ptr<int> ptr(new int(x));
+            std::shared_ptr<int> ptr(new int(x));
             values.push_back(ptr);
         }
-};*/
-
-class A {
-    public:
-        std::vector<int*> values;
-        ~A() {
-            for(size_t i = 0; i < values.size(); ++i)
-            {
-                delete values[i];
-            }
-        }
-        void add(int x)
-        {
-            values.push_back(new int(x)); 
-        }
 };
-
 
 int main() {
     /*try{

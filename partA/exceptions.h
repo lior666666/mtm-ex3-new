@@ -22,5 +22,6 @@ namespace mtm
     class InvalidInterval : public Exception{};
     //partC
     class EventAlreadyExists : public Exception{};
+    class EventDoesNotExist : public Exception{};
 }
 #endif

@@ -10,9 +10,9 @@ namespace mtm{
         public:
         OneTimeEvent<EventType>(DateWrap date, std::string name): EventContainer(), event_date(date) ,event_name(name)
         { 
-            events_list.addElement(EventType(event_date, event_name).clone()); 
+           events_list.addElement(EventType(event_date, event_name).clone()); 
         }
-        ~ OneTimeEvent<EventType>()
+        ~OneTimeEvent<EventType>()
         {
             PriorityQueue<BaseEvent*>* current_pointer = events_list.getIterator();
             BaseEvent* pointer; 

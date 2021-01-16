@@ -9,7 +9,6 @@
         PriorityQueue<T>* next;
         PriorityQueue<T>* iterator;
         public:
-    
             PriorityQueue<T>()
             {
                 iterator = NULL;
@@ -164,6 +163,7 @@
                     }
                 }
             }
+
             void addElement(T data, PriorityQueue<T>* location)// should not call if list is empty!!! 
             { 
                 if(location == this)
@@ -204,6 +204,7 @@
                     }
                 }
             }
+
             /*
             void addElement(T* data_pointer) 
             {
@@ -225,7 +226,7 @@
                     while(next_pointer != NULL)
                     {
                         if(next_pointer->data == data)
-                        {  
+                        { 
                             //PriorityQueue<T>* temp_pointer = next_pointer;
                             current_pointer->next = current_pointer->next->next; 
                             next_pointer->next = NULL;
@@ -239,7 +240,7 @@
                return false; 
             }  
 
-            // removes the first element in the list. 
+            // removes the first element in the list and returns it.
             T popTop()
             {
                  T value;

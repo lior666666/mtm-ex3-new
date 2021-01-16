@@ -6,6 +6,8 @@ namespace mtm{
     class OpenEvent : public BaseEvent{ 
     public:
         OpenEvent() = default;
+        //OpenEvent& operator=(const OpenEvent&);
+        OpenEvent(const OpenEvent& event);
         OpenEvent(DateWrap date, std::string name);
         ~OpenEvent() {}
         BaseEvent* clone() const override;

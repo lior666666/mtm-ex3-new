@@ -10,22 +10,24 @@ namespace mtm{
     protected:
         std::string event_name;
         DateWrap event_date;
-        PriorityQueue<int> event_participants;
+        PriorityQueue<long> event_participants;
     public:
-        BaseEvent() = default;
+        BaseEvent() = default; 
         BaseEvent(DateWrap date, std::string name);
         BaseEvent(const BaseEvent& event);
         virtual ~BaseEvent() {}
-        virtual void registerParticipant(const int student);
-        void unregisterParticipant(const int student);
+        virtual void registerParticipant(const long student);
+        void unregisterParticipant(const long student);
         std::ostream& printShort(std::ostream& out) const;
         std::ostream& printLong(std::ostream& out) const;
         const DateWrap& getDate() const;
         const std::string getName() const;
+        const PriorityQueue<long> getParticipants() const;
         virtual BaseEvent* clone() const = 0;
         friend bool operator==(const BaseEvent& event1, const BaseEvent& event2);
-        friend bool operator<(const BaseEvent& event1, const BaseEvent& event2);
+        bool isSmaller(BaseEvent* event2);
+        bool isEqual(BaseEvent* event2);
     };
-    void isVaildStudent(const int student);
+    void isVaildStudent(const long student);
 }
 #endif

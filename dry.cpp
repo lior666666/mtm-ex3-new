@@ -22,8 +22,54 @@ namespace mtm{
     }
 }
 
+//*****************************first version - with smart pointers*****************//
+/*template<typename T>
+class smart_ptr {
+	T* data;
+    public:	typedef T element_type;
+         smart_ptr(T* ptr = NULL) : data(ptr) {}
+        ~smart_ptr() {	delete data;	}
+        T& operator*() const {	return *data; }
+        T* operator->() const { return data;}
+        smart_ptr(smart_ptr& other) : data(NULL)
+        {
+            if (other.data)
+            { 
+                this->data = other.data; 
+                other.data = NULL;
+            }
+        }
+};
+
+
+class A {
+    public:
+        std::vector<smart_ptr<int>> values;
+        void add(int x)
+        {
+            smart_ptr<int> ptr(new int(x));
+            values.push_back(ptr);
+        }
+};*/
+
+class A {
+    public:
+        std::vector<int*> values;
+        ~A() {
+            for(size_t i = 0; i < values.size(); ++i)
+            {
+                delete values[i];
+            }
+        }
+        void add(int x)
+        {
+            values.push_back(new int(x)); 
+        }
+};
+
+
 int main() {
-    try{
+    /*try{
         std::vector<std::vector<char>> warp_vec_sliced1;
         std::vector<std::vector<int>> warp_vec_sliced2;
         std::vector<char> vec1 {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'};
@@ -48,6 +94,11 @@ int main() {
         }
     } catch (mtm::BadInput) {
         std::cout << "BadInput" << std::endl;
-    }
+    }*/
+    A a, sliced;
+    a.add(0); a.add(1); a.add(2); a.add(3); a.add(4); a.add(5);
+    sliced.values = mtm::slice(a.values, 1, 1, 4);
+    *(sliced.values[0]) = 800;
+    std::cout << *(a.values[1]) << std::endl;
     return 0;
 }

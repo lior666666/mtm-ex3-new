@@ -18,6 +18,15 @@ namespace mtm{
         */
         Festival(const Festival& container);
         
+        /**
+        * operator= : acts like a copy constructor.
+        * @param this - the Festival to copy to.
+        * @param container - the Festival to copy from.
+        * @return- 
+        *  return the the copied Festival.
+        */
+        Festival& operator=(const Festival& container) = default;
+
         void add(const BaseEvent& event) override;
         
         /**

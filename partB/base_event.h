@@ -12,23 +12,15 @@ namespace mtm{
         DateWrap event_date;
         PriorityQueue<long> event_participants;
     public:
-        /**
-        * BaseEvent: default empty constructor. 
-        */
-        BaseEvent() = default; 
+        BaseEvent() = default;
+
+        BaseEvent(const BaseEvent& event) = default;
+
+        BaseEvent& operator=(const BaseEvent&) = default;
+
+        virtual ~BaseEvent() = default;
 
         BaseEvent(DateWrap date, std::string name);
-
-        /**
-        * BaseEvent: copy constructor.
-        * @param event - the BaseEvent to copy.
-        */
-        BaseEvent(const BaseEvent& event);
-
-        /**
-        * ~BaseEvent: destructor. Free the event.
-        */
-        virtual ~BaseEvent() {}
 
         virtual void registerParticipant(const long student);
 

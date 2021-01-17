@@ -21,6 +21,15 @@ namespace mtm{
             */
             EventContainer(const EventContainer& container);
 
+            /**
+            * operator= : acts like a copy constructor.
+            * @param this - the EventContainer to copy to.
+            * @param container - the EventContainer to copy from.
+            * @return- 
+            *  return the the copied EvenetContainer.
+            */
+            EventContainer& operator=(const EventContainer& container);
+
             virtual void add(const BaseEvent& event);
 
             /**

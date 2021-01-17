@@ -6,29 +6,15 @@ namespace mtm{
     class ClosedEvent : public BaseEvent{
         PriorityQueue<long> event_invited;
     public:
-        /**
-        * ClosedEvent: default empty constructor. 
-        */
         ClosedEvent() = default;
 
-        /**
-        * operator=: assignment operator. Takes the data from the given ClosedEvent to the current one.
-        * @param closed_event - the ClosedEvent to assign.
-        */
-        ClosedEvent& operator=(const ClosedEvent&);
+        ClosedEvent(const ClosedEvent& event) = default;
 
-        /**
-        * ClosedEvent: copy constructor.
-        * @param event - the ClosedEvent to copy.
-        */
-        ClosedEvent(const ClosedEvent& event);
+        ClosedEvent& operator=(const ClosedEvent&) = default;
+
+        ~ClosedEvent() = default;
 
         ClosedEvent(DateWrap date, std::string name);
-
-        /**
-        * ~ClosedEvent: destructor. Free the event.
-        */
-        ~ClosedEvent() {}
 
         /**
         * getInvited: Get the invited participants list of the current event.

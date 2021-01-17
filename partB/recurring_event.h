@@ -13,7 +13,14 @@ namespace mtm{
         RecurringEvent<EventType>() = default;
 
         RecurringEvent<EventType>(const RecurringEvent<EventType>& event) = default;
-
+        
+        /**
+        * operator= : acts like a copy constructor.
+        * @param this - the RecurringEvent to copy to.
+        * @param container - the RecurringEvent to copy from.
+        * @return- 
+        *  return the the copied RecurringEvent.
+        */
         RecurringEvent<EventType>& operator=(const RecurringEvent<EventType>&) = default;
 
         RecurringEvent<EventType>(DateWrap first_date, std::string name, int num_occurrences, int days_interval) :
@@ -51,7 +58,7 @@ namespace mtm{
                 current_pointer = events_list.getIterator();
             }
         } 
-
+        
         /**
         * clone: clones and allocates a new RecurringEvent as this.
         * @return

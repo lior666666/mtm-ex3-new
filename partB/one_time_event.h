@@ -9,9 +9,16 @@ namespace mtm{
         std::string event_name; 
     public:
         OneTimeEvent<EventType>() = default;
-
+       
         OneTimeEvent<EventType>(const OneTimeEvent<EventType>& event) = default;
-
+        
+        /**
+        * operator= : acts like a copy constructor.
+        * @param this - the OneTimeEvent to copy to.
+        * @param container - the EventContainer to from.
+        * @return- 
+        *  return the the copied EvenetContainer.
+        */
         OneTimeEvent<EventType>& operator=(const OneTimeEvent<EventType>&) = default;
         
         OneTimeEvent<EventType>(DateWrap date, std::string name) :

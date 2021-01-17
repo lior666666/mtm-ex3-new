@@ -16,6 +16,33 @@ namespace mtm{
         }
     }
 
+    EventContainer& EventContainer::operator=(const EventContainer& container)
+    {
+        if(this == &container) 
+        {
+            return *this;
+        }
+        PriorityQueue<BaseEvent*>* current_pointer = events_list.getIterator();
+        BaseEvent* pointer; 
+        while (current_pointer != NULL)
+        {
+            pointer = events_list.popTop();
+            delete pointer; 
+            current_pointer = events_list.getIterator();
+        }
+        PriorityQueue<BaseEvent*> container_list = container.events_list;
+        current_pointer = container_list.getIterator();
+        BaseEvent* new_event = container_list.getData()->clone(); 
+        events_list.addElement(new_event); 
+        current_pointer = container_list.getNext();
+        while(current_pointer != NULL)
+        {
+            BaseEvent* new_next_event = container_list.getData()->clone(); 
+            events_list.addElement(new_next_event);
+            current_pointer = container_list.getNext();
+        }
+        return *this;
+    }
     EventContainer::EventIterator::EventIterator(const EventIterator& event_iterator) :
         pointer(event_iterator.pointer), head_list(event_iterator.head_list)
     {

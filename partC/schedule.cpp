@@ -13,9 +13,10 @@ namespace mtm{
             current_pointer = events_board.getIterator();
         } 
     }
+
     BaseEvent* Schedule::findEvent(const DateWrap date, const std::string name) const
     {
-        PriorityQueue<BaseEvent*> temp = events_board; // because it's const we had to make a temp copy. 
+        PriorityQueue<BaseEvent*> temp = events_board;
         PriorityQueue<BaseEvent*>* event_pointer = temp.getIterator();
         while (event_pointer != NULL)
         {
@@ -29,7 +30,7 @@ namespace mtm{
         throw EventDoesNotExist();
         return NULL; 
     }
-
+    
     bool Schedule::isContains(EventContainer* event_container)
     {
         EventContainer::EventIterator temp_pointer = event_container->begin();
@@ -56,7 +57,7 @@ namespace mtm{
     void Schedule::addEvents(const EventContainer& event_container_main)
     {
         EventContainer* event_container = event_container_main.clone();
-        if(!isContains(event_container))
+        if (!isContains(event_container))
         {
             EventContainer::EventIterator event_pointer = event_container->begin();
             EventContainer::EventIterator ending = event_container->end();
@@ -65,13 +66,13 @@ namespace mtm{
                 PriorityQueue<BaseEvent*>* current_schedule_pointer = events_board.getIterator(); 
                 BaseEvent& event = *event_pointer; 
                 BaseEvent* add_event = event.clone();
-                if(events_board.getSize() == 0)
+                if (events_board.getSize() == 0)
                 {
                     events_board.addElement(add_event); 
                 }
                 else
                 {
-                    if(event.isSmaller(events_board.getData()))
+                    if (event.isSmaller(events_board.getData()))
                     {
                         events_board.addElement(add_event, &events_board); 
                     }
@@ -79,7 +80,7 @@ namespace mtm{
                     {   
                         PriorityQueue<BaseEvent*>* previous_schedule_pointer = events_board.getIterator(); 
                         current_schedule_pointer = events_board.getNext();
-                        while(current_schedule_pointer !=NULL)
+                        while (current_schedule_pointer !=NULL)
                         {
                             if(event.isSmaller(events_board.getData()))
                             {
@@ -89,7 +90,7 @@ namespace mtm{
                             previous_schedule_pointer = current_schedule_pointer;
                             current_schedule_pointer = events_board.getNext();
                         }
-                        if(current_schedule_pointer == NULL)
+                        if (current_schedule_pointer == NULL)
                         {
                             events_board.addElement(add_event, NULL);
                         }
@@ -103,25 +104,25 @@ namespace mtm{
 
     void Schedule::registerToEvent(const DateWrap date, const std::string name, const long student)
     {
-        BaseEvent* needed_event = findEvent(date, name);
-        if(needed_event != NULL) // MAYBEE WE CAN REMOVE THAT SINCE WE THROWING AN EXECPTION IN FIND EVENT. 
+        BaseEvent* event = findEvent(date, name);
+        if(event != NULL)
         {
-            needed_event->registerParticipant(student);
+            event->registerParticipant(student);
         }
     }
 
     void Schedule::unregisterFromEvent(const DateWrap date, const std::string name, const long student)
     {
-        BaseEvent* needed_event = findEvent(date, name);
-        if(needed_event != NULL) // MAYBEE WE CAN REMOVE THAT SINCE WE THROWING AN EXECPTION IN FIND EVENT. 
+        BaseEvent* event = findEvent(date, name);
+        if(event != NULL)
         {
-            needed_event->unregisterParticipant(student);
+            event->unregisterParticipant(student);
         }
     }
     
     void Schedule::printAllEvents() const
     {
-        PriorityQueue<BaseEvent*> temp = events_board; // because it's const we had to make a temp copy. 
+        PriorityQueue<BaseEvent*> temp = events_board;
         PriorityQueue<BaseEvent*>* event_pointer = temp.getIterator();
         while (event_pointer != NULL)
         {
@@ -134,13 +135,13 @@ namespace mtm{
 
     void Schedule::printMonthEvents(const int month, const int year) const
     {
-        PriorityQueue<BaseEvent*> temp = events_board; // because it's const we had to make a temp copy. 
+        PriorityQueue<BaseEvent*> temp = events_board;
         PriorityQueue<BaseEvent*>* event_pointer = temp.getIterator();
         while (event_pointer != NULL)
         {
             BaseEvent* current_event = temp.getData();
             DateWrap date = current_event->getDate();
-            if(date.month() == month && date.year() == year)
+            if (date.month() == month && date.year() == year)
             {
                 current_event->printShort(std::cout);
                 std::cout << std::endl;
@@ -151,8 +152,8 @@ namespace mtm{
 
     void Schedule::printEventDetails(const DateWrap date, const std::string name) const
     {
-        BaseEvent* needed_event = findEvent(date, name);
-        needed_event->printLong(std::cout);
+        BaseEvent* event = findEvent(date, name);
+        event->printLong(std::cout);
         std::cout << std::endl;
     }
 

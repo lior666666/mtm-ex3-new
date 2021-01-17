@@ -10,12 +10,6 @@ namespace mtm
         event_name(std::string(name)), event_date(DateWrap(date)) {
     }
 
-    BaseEvent::BaseEvent(const BaseEvent& event) : 
-        event_name(event.event_name), event_date(DateWrap(event.event_date)), 
-        event_participants(PriorityQueue<long>(event.event_participants)) 
-        {
-    }
-
     void BaseEvent::registerParticipant(const long student)
     {
         isVaildStudent(student);

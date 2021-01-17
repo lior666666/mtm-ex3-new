@@ -7,19 +7,18 @@ namespace mtm{
     class CustomEvent : public BaseEvent{
         CanRegister register_condition;
     public:
-        /**
-        * CustomEvent: default empty constructor. 
-        */
         CustomEvent() = default;
+
+        CustomEvent(const CustomEvent& event) = default;
+
+        CustomEvent& operator=(const CustomEvent&) = default;
+
+        ~CustomEvent() = default;
 
         CustomEvent(DateWrap date, std::string name, CanRegister condition) : 
             BaseEvent(date, name), register_condition(condition) {
         }
 
-        /**
-        * ~BaseEvent: destructor. Free the event.
-        */
-        ~CustomEvent() {}
 
         void registerParticipant(const long student) override
         {
@@ -43,16 +42,6 @@ namespace mtm{
         const CanRegister getRegisterCondition() const
         {
             return register_condition;
-        }
-
-        /**
-        * CustomEvent: copy constructor.
-        * @param event - the CustomEvent to copy.
-        */
-        CustomEvent(const CustomEvent& event) : 
-            BaseEvent(event),register_condition(event.register_condition)
-        {
-
         }
 
         BaseEvent* clone() const

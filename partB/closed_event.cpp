@@ -34,11 +34,6 @@ namespace mtm
         return event_invited;
     }
 
-    ClosedEvent::ClosedEvent(const ClosedEvent& event) : 
-        BaseEvent(event), event_invited(PriorityQueue<long>(event.event_invited)) 
-    {
-    }
-
     BaseEvent* ClosedEvent::clone() const
     {
         return new ClosedEvent(*this);

@@ -29,7 +29,7 @@ namespace mtm{
         throw EventDoesNotExist();
         return NULL; 
     }
-
+    
     bool Schedule::isContains(EventContainer* event_container)
     {
         EventContainer::EventIterator temp_pointer = event_container->begin();
@@ -42,6 +42,7 @@ namespace mtm{
             {
                 if (event.isEqual(events_board.getData()))
                 {
+                    delete event_container;
                     throw EventAlreadyExists();
                     return true; 
                 }

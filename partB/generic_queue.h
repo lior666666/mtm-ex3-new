@@ -3,17 +3,26 @@
 #include <iostream>
     namespace mtm {
     template<class T>
+    /** A class that stores generic elements by order that you decide on.*/
     class PriorityQueue
     {
         T data;
+        /** Pointer to point to the next element in list. */
         PriorityQueue<T>* next;
+        /** Iterator that provides the user with the option to go through the list by order.*/
         PriorityQueue<T>* iterator;
         public:
+            /**
+            *  PriorityQueue<T>: Constructor of the class, creats a new empty list.
+            */
             PriorityQueue<T>()
             {
                 iterator = NULL;
                 next = NULL; 
             }
+            /**
+            *  ~PriorityQueue<T>: Destructor of the class, destroys the class and frees the memory.
+            */
             ~PriorityQueue<T>()
             {
                 if(this->next !=NULL)
@@ -31,6 +40,11 @@
                     delete current_pointer;
                 }
             }
+            /**
+            *  PriorityQueue<T>: Copy Constructor of the class, creats a new copy of the list it gets by reference.  
+            *
+            * @param  queue_to_copy - a reference of another Priority Queue to copy.
+            */
             PriorityQueue<T>(const PriorityQueue<T>& queue_to_copy)
             {
                 data = queue_to_copy.data; 
@@ -53,7 +67,13 @@
                     next = NULL; 
                 }
             }
-            
+            /**
+            *  operator=: Makes a new copy of the list and moves it to the new Priority Queue.
+            *
+            * @param queue_to_copy - a reference of another Priority Queue to copy.
+            * @return
+            * 	A new Queue in case of success.
+            */
             PriorityQueue<T>& operator=(const PriorityQueue<T>& queue_to_copy)
             {
                 if(this == &queue_to_copy)
@@ -95,7 +115,14 @@
                 }
                 return *this;
             }
-            //checks if element already in the list, true if he is false in not. 
+            /**
+            *  containsElement: cheks if the element that the queue recieves already in the queue. 
+            *  Note: it's users responsibility to provide an operator= to the data he sends. 
+            * @param data - the element that needs to be checked. 
+            * @return
+            * 	true - if data exists in queue. 
+            * 	false - if data is not there. 
+            */ 
             bool containsElement(T data)
             {
                 PriorityQueue<T>* current_pointer = next; 
@@ -112,8 +139,12 @@
                 }
                 return false;
             }
-            //adds a new element to the list by it's priotity. return true if sucsses, false if element already in the list. 
-            // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
+            /**
+            *  addElement: Adds a new element to the list by it's priotity by operator< that is provided by the user. In case the element already in the list,
+            *  it won't add it again!
+            *  Iterator is undefined after the function is done.   
+            * @param data - the data that needs to be added to the queue. 
+            */
             void addElement(T data) 
             {
                 PriorityQueue<T>* current_pointer = NULL;
@@ -163,7 +194,14 @@
                     }
                 }
             }
-
+             /**
+            *  addElement: Adds a new element to the list after the location the was recieved from the second argument. 
+            *  If you want to add the argument to the end of the list, you shoul pass NULL to the second argument. 
+            *  If you you want it to be at the beginning, you should pass the head of the list(the list itself).  
+            *  Iterator is undefined after the function is done.   
+            * @param data - the data that needs to be added to the queue. 
+            * @param location - a pointer that points to one of the elements in the list, and the data will be inserted in a new elemnt after the location. 
+            */
             void addElement(T data, PriorityQueue<T>* location)// should not call if list is empty!!! 
             { 
                 if(location == this)
@@ -204,19 +242,14 @@
                     }
                 }
             }
-
-            /*
-            void addElement(T* data_pointer) 
-            {
-               addElement((*data_pointer));
-            }
-            void addElement(T& data_pointer) 
-            {
-               addElement((*data_pointer));
-            }*/
-
-            //removes an elenemt from the list. returns true if the elemnt removed, and false if the elemnt not in the list. 
-            // !! ITERATOR IS NOT DEFINDED AFTER THIS FUNCTION. 
+            /**
+            * removeElement: Removes an element from the queue with the same data as received. returns true , and . 
+            * Note: relies on operator= from the user for the data that is provided. 
+            * @param data - the data of the element that needs to be removed from the queue. 
+            * @return
+            * 	true - if the elemnt removed
+            * 	false - if an elemnt with same data is not in the list.
+            */
             bool removeElement(T data)
             {
                if(next != NULL)
@@ -240,7 +273,12 @@
                return false; 
             }  
 
-            // removes the first element in the list and returns it.
+            // 
+            /**
+            * popTop: Removes the first element from the list and returns it's data.
+            * @return
+            * 	returns the data of the elemnt that was removed. 
+            */
             T popTop()
             {
                  T value;
@@ -258,28 +296,43 @@
                    value = NULL; 
                 }
                 return value; 
-            }
-
-            // nitialize the iterator to the top of the list and return it. 
+            }   
+            /**
+            * getIterator: Initialize the iterator to the top of the list and return it.
+            * @return
+            * 	returns the iterator of the list that points to it's head.  
+            */
             PriorityQueue<T>* getIterator()
             {
                 iterator = next; 
                 return iterator; 
             }
 
-            //returns the data of the current elemnt.      
+            /**
+            * getData: Returns the data of the element which the iterator points on.
+            * @return
+            * 	returns the data of the element which the iterator points on.
+            */
             T getData()
             {
                 return iterator->data;
-            }
-
-            // moves the iterator to the next element in the list and returns it. 
+            } 
+            /**
+            * getNext: Moves the iterator to the next element in the list and returns it.
+            * @return
+            * 	returns the iterator of the list. 
+            */
             PriorityQueue<T>* getNext()
             {
                 iterator = iterator->next; 
                 return iterator;
             }
-
+            /**
+            * printPriorityQueue: Prints the list by order. Each element in a new line. 
+            * @param out - the ostream where should the output go. 
+            * @return
+            * 	returns the to the ostream. 
+            */
             std::ostream& printPriorityQueue(std::ostream& out) const
             {
                 if(next != NULL)
@@ -294,8 +347,11 @@
                 }
                 return out; 
             }
-
-            // returns the size of the list. 
+           /**
+            * getSize: returns the size of the queue depending on how much elements are in it.
+            * @return
+            *  returns the size of the list. 
+            */
             int getSize()
             {
                 int counter = 0; 
@@ -307,6 +363,15 @@
                 }
                 return counter; 
             }
+            /**
+            *  operator== compares between 2 lists.
+            *
+            * @param queue1 - the first queue. 
+            * @param queue2 - the second queue. 
+            * @return
+            * 	true - if both lists are equal.
+            * 	false - if lists are not equal.
+            */
             friend bool operator==(const PriorityQueue<T>& queue1, const PriorityQueue<T>& queue2)
             {
                 PriorityQueue<T>* queue1_pointer = queue1.next;

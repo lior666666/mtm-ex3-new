@@ -13,9 +13,12 @@ namespace mtm{
             EventContainer() = default;
             EventContainer(const EventContainer& container);
             virtual void add(const BaseEvent& event);
+            /** ~EventContainer: Destructor to destroy the class and free all the memory */
             virtual ~EventContainer() {}
             class EventIterator{
+                /** pointer that will move through the events. */
                 PriorityQueue<BaseEvent*>* pointer; 
+                /** pointer to the head of the events list to know through which list to move and to keep it.*/
                 PriorityQueue<BaseEvent*>* head_list;
             public:
                 EventIterator() = default;
@@ -30,6 +33,7 @@ namespace mtm{
             };
             EventContainer::EventIterator begin();
             EventContainer::EventIterator end(); 
+            /** added a virtual clone function to clone diferent event containers. */
             virtual EventContainer* clone() const = 0;
     };
 }

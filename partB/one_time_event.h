@@ -12,6 +12,7 @@ namespace mtm{
         { 
            events_list.addElement(EventType(event_date, event_name).clone()); 
         }
+        /** ~OneTimeEvent: Destructor to destroy the class and free all the memory */
         ~OneTimeEvent<EventType>()
         {
             BaseEvent* pointer; 
@@ -20,6 +21,12 @@ namespace mtm{
         }
         OneTimeEvent<EventType>(const  OneTimeEvent<EventType>& container): EventContainer(container), event_date(container.event_date),event_name(container.event_name)
         {}
+        /**
+        *  clone: clones and allocates a new OneTimeEvent as this.
+        *  @param this - the OneTimeEvent to clone
+        * @return
+        * 	returns an adress for an EventContainer pointer.
+        */    
         EventContainer* clone() const
         {
             return new OneTimeEvent(*this);

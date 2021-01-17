@@ -31,6 +31,7 @@ namespace mtm{
                 events_list.addElement(EventType(temp_date, event_name).clone(), NULL);
             }
         }
+        /** ~RecurringEvent: Destructor to destroy the class and free all the memory */
         ~RecurringEvent<EventType>()
         {
             PriorityQueue<BaseEvent*>* current_pointer = events_list.getIterator();
@@ -45,6 +46,12 @@ namespace mtm{
         RecurringEvent<EventType>(const RecurringEvent<EventType>& container): EventContainer(container), first_event_date(container.first_event_date), 
         event_name(container.event_name),num_event_occurrences(container.num_event_occurrences),days_event_interval(container.days_event_interval)
         {}
+        /**
+        *  clone: clones and allocates a new RecurringEvent as this.
+        *  @param this - the RecurringEvent to clone
+        * @return
+        * 	returns an adress for an EventContainer pointer.
+        */    
         EventContainer* clone() const
         {
             return new RecurringEvent(*this);

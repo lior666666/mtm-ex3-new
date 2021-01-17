@@ -42,6 +42,7 @@ namespace mtm{
             {
                 if (event.isEqual(events_board.getData()))
                 {
+                    delete event_container;
                     throw EventAlreadyExists();
                     return true; 
                 }

@@ -15,10 +15,6 @@ namespace mtm
     DateWrap::DateWrap(const DateWrap& date_wrap)
     {
         date = dateCopy(date_wrap.date);
-        if(date == NULL)
-        {
-            throw AllocationFailed();
-        }
     }
 
     //#3
@@ -33,10 +29,6 @@ namespace mtm
             return *this;
         }
         Date copy_date = dateCopy(date_wrap.date);
-        if(copy_date == NULL)
-        {
-            throw AllocationFailed(); // return to this point
-        }
         dateDestroy(date);
         date = copy_date;
         return *this;

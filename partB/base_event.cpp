@@ -1,19 +1,15 @@
 #include "base_event.h"
+
+const char SPACE = ' ';
+const int MINIMUN_STUDENT_ID = 1;
+const int MAXMUN_STUDENT_ID = 1234567890;
+
 namespace mtm
 {
-    //#1
-    //priority queue will be initialized by default constructor
     BaseEvent::BaseEvent(DateWrap date, std::string name) : 
         event_name(std::string(name)), event_date(DateWrap(date)) {
     }
 
-    BaseEvent::BaseEvent(const BaseEvent& event) : 
-        event_name(event.event_name), event_date(DateWrap(event.event_date)), 
-        event_participants(PriorityQueue<long>(event.event_participants)) 
-        {
-    }
-
-    //#2
     void BaseEvent::registerParticipant(const long student)
     {
         isVaildStudent(student);
@@ -24,7 +20,6 @@ namespace mtm
         event_participants.addElement(student);
     }
 
-    //#3
     void BaseEvent::unregisterParticipant(const long student)
     {
         isVaildStudent(student);
@@ -34,14 +29,12 @@ namespace mtm
         }
     }
 
-    //#4
     std::ostream& BaseEvent::printShort(std::ostream& out) const
     {
-        out << event_name << ' ' << event_date << std::endl; 
+        out << event_name << SPACE << event_date << std::endl; 
         return out;
     }
 
-    //#5
     std::ostream& BaseEvent::printLong(std::ostream& out) const
     {
         this->printShort(out);
@@ -49,34 +42,26 @@ namespace mtm
         return out;
     }
 
-    //#6
     const DateWrap& BaseEvent::getDate() const
     {
         return event_date;
     }
 
-    //#7
     const std::string BaseEvent::getName() const
     {
         return event_name;
     }
 
-    //#8
     const PriorityQueue<long> BaseEvent::getParticipants() const
     {
         return event_participants;
     }
 
-    //#9
-    //******pure virtual*****
-
-    //#10
     bool operator==(const BaseEvent& event1, const BaseEvent& event2)
     {
         return event1.event_date == event2.event_date && event1.event_name.compare(event2.event_name) == 0;
     }
 
-    //#11
     bool BaseEvent::isSmaller(BaseEvent* event2)
     {
         if (event_date == event2->event_date)
@@ -85,16 +70,15 @@ namespace mtm
         }
         return event_date < event2->event_date;
     }
-    //#12
+
     bool BaseEvent::isEqual(BaseEvent* event2)
     {
         return event_date == event2->event_date && event_name.compare(event2->event_name) == 0; 
     }
 
-    //#13
     void isVaildStudent(const long student)
     {
-        if (student < 1 || student > 1234567890)
+        if (student < MINIMUN_STUDENT_ID || student > MAXMUN_STUDENT_ID)
         {
             throw InvalidStudent();
         }

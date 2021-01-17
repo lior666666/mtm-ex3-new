@@ -4,15 +4,33 @@
 namespace mtm{
     class Festival : public EventContainer{
         DateWrap event_date; 
-        public:
+    public:
         Festival(DateWrap date);  
-        /** ~Festival: Destructor to destroy the class and free all the memory */
+
+        /**
+        * ~Festival: destructor. Free the festival.
+        */
         ~Festival();
+
+        /**
+        * Festival: copy constructor.
+        * @param container - the festival to copy.
+        */
         Festival(const Festival& container);
+        
+        /**
+        * operator= : acts like a copy constructor.
+        * @param this - the Festival to copy to.
+        * @param container - the Festival to copy from.
+        * @return- 
+        *  return the the copied Festival.
+        */
+        Festival& operator=(const Festival& container) = default;
+
         void add(const BaseEvent& event) override;
+        
         /**
         *  clone: clones and allocates a new Festival as this.
-        *  @param this - the Festival to clone
         * @return
         * 	returns an adress for an EventContainer pointer.
         */   

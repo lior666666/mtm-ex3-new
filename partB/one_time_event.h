@@ -7,23 +7,37 @@ namespace mtm{
     {
         DateWrap event_date; 
         std::string event_name; 
-        public:
-        OneTimeEvent<EventType>(DateWrap date, std::string name): EventContainer(), event_date(date) ,event_name(name)
+    public:
+        OneTimeEvent<EventType>() = default;
+       
+        OneTimeEvent<EventType>(const OneTimeEvent<EventType>& event) = default;
+        /**
+        * operator= : acts like a copy constructor.
+        * @param this - the OneTimeEvent to copy to.
+        * @param container - the EventContainer to from.
+        * @return- 
+        *  return the the copied EvenetContainer.
+        */
+        OneTimeEvent<EventType>& operator=(const OneTimeEvent<EventType>&) = default;
+        
+        OneTimeEvent<EventType>(DateWrap date, std::string name) :
+            EventContainer(), event_date(date) ,event_name(name)
         { 
            events_list.addElement(EventType(event_date, event_name).clone()); 
         }
-        /** ~OneTimeEvent: Destructor to destroy the class and free all the memory */
+
+        /**
+        * ~OneTimeEvent: destructor. Destroy the class and free all the memory.
+        */
         ~OneTimeEvent<EventType>()
         {
             BaseEvent* pointer; 
             pointer = events_list.popTop();
             delete pointer; 
         }
-        OneTimeEvent<EventType>(const  OneTimeEvent<EventType>& container): EventContainer(container), event_date(container.event_date),event_name(container.event_name)
-        {}
+
         /**
         *  clone: clones and allocates a new OneTimeEvent as this.
-        *  @param this - the OneTimeEvent to clone
         * @return
         * 	returns an adress for an EventContainer pointer.
         */    

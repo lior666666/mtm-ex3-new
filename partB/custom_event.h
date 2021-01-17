@@ -7,17 +7,19 @@ namespace mtm{
     class CustomEvent : public BaseEvent{
         CanRegister register_condition;
     public:
-        //#1
-        //priority queue will be initialized by default constructor
         CustomEvent() = default;
+
+        CustomEvent(const CustomEvent& event) = default;
+
+        CustomEvent& operator=(const CustomEvent&) = default;
+
+        ~CustomEvent() = default;
+
         CustomEvent(DateWrap date, std::string name, CanRegister condition) : 
             BaseEvent(date, name), register_condition(condition) {
         }
 
-        //#2
-        ~CustomEvent() {}
 
-        //#3
         void registerParticipant(const long student) override
         {
             isVaildStudent(student);
@@ -32,29 +34,16 @@ namespace mtm{
             event_participants.addElement(student);
         }
 
-        /*//#4
-        BaseEvent* clone() const override
-        {
-            DateWrap copied_date = DateWrap(this->event_date);
-            std::string copied_name = event_name;
-            CustomEvent* copied_event = NULL;
-            *copied_event = CustomEvent(copied_date, copied_name, CanRegister(register_condition));
-            copied_event->event_participants = PriorityQueue<long>(this->event_participants);
-            return copied_event;
-        }*/
-
+        /**
+        * getRegisterCondition: Get the register condition of the current event.
+        * @return
+        * 	The register condition of the current event.
+        */
         const CanRegister getRegisterCondition() const
         {
             return register_condition;
         }
 
-        CustomEvent(const CustomEvent& event) : 
-            BaseEvent(event),register_condition(event.register_condition)
-        {
-
-        }
-
-        //#2
         BaseEvent* clone() const
         {
             return new CustomEvent(*this);

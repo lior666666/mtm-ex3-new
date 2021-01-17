@@ -1,7 +1,10 @@
 #include "date_wrap.h"
+
+const char DATE_SIGN = '/';
+const int DEFAULT_POSITIVE_NUMBER = 1;
+
 namespace mtm
 {
-    //#1
     DateWrap::DateWrap(int day, int month, int year)
     {
         date = dateCreate(day, month, year);
@@ -11,18 +14,16 @@ namespace mtm
         }
     }
 
-    //#2
     DateWrap::DateWrap(const DateWrap& date_wrap)
     {
         date = dateCopy(date_wrap.date);
     }
 
-    //#3
     DateWrap::~DateWrap()
     {
         dateDestroy(date);
     }
-    //#4
+
     DateWrap& DateWrap::operator=(const DateWrap& date_wrap)
     {
         if(this == &date_wrap) {
@@ -34,12 +35,11 @@ namespace mtm
         return *this;
     }
 
-    //#5
     int DateWrap::day() const
     {
-        int day = 1;
-        int month = 1;
-        int year = 1;
+        int day = DEFAULT_POSITIVE_NUMBER;
+        int month = DEFAULT_POSITIVE_NUMBER;
+        int year = DEFAULT_POSITIVE_NUMBER;
         int* day_pointer = &day;
         int* month_pointer = &month;
         int* year_pointer = &year;
@@ -47,12 +47,11 @@ namespace mtm
         return *day_pointer;
     }
 
-    //#6
     int DateWrap::month() const
     {
-        int day = 1;
-        int month = 1;
-        int year = 1;
+        int day = DEFAULT_POSITIVE_NUMBER;
+        int month = DEFAULT_POSITIVE_NUMBER;
+        int year = DEFAULT_POSITIVE_NUMBER;
         int* day_pointer = &day;
         int* month_pointer = &month;
         int* year_pointer = &year;
@@ -60,12 +59,11 @@ namespace mtm
         return *month_pointer;
     }
 
-    //#7
     int DateWrap::year() const
     {
-        int day = 1;
-        int month = 1;
-        int year = 1;
+        int day = DEFAULT_POSITIVE_NUMBER;
+        int month = DEFAULT_POSITIVE_NUMBER;
+        int year = DEFAULT_POSITIVE_NUMBER;
         int* day_pointer = &day;
         int* month_pointer = &month;
         int* year_pointer = &year;
@@ -73,51 +71,42 @@ namespace mtm
         return *year_pointer;
     }
 
-    //#8
     std::ostream& operator<<(std::ostream& out, const DateWrap& date_wrap)
     {
-        out << date_wrap.day() << '/' << date_wrap.month() << '/' << date_wrap.year(); 
+        out << date_wrap.day() << DATE_SIGN << date_wrap.month() << DATE_SIGN << date_wrap.year(); 
         return out;
     }
 
-    //#9
     bool operator==(const DateWrap& date_wrap1, const DateWrap& date_wrap2)
     {
         return dateCompare(date_wrap1.date, date_wrap2.date) == 0;
     }
 
-
-    //#10
     bool operator!=(const DateWrap& date_wrap1, const DateWrap& date_wrap2)
     {
         return !(date_wrap1 == date_wrap2);
     }
 
-    //#11
     bool operator<(const DateWrap& date_wrap1, const DateWrap& date_wrap2)
     {
         return dateCompare(date_wrap1.date, date_wrap2.date) < 0;
     }
 
-    //#12
     bool operator>=(const DateWrap& date_wrap1, const DateWrap& date_wrap2)
     {
         return !(date_wrap1 < date_wrap2);
     }
 
-    //#13
     bool operator>(const DateWrap& date_wrap1, const DateWrap& date_wrap2)
     {
         return date_wrap2 < date_wrap1;
     }
 
-    //#14
     bool operator<=(const DateWrap& date_wrap1, const DateWrap& date_wrap2)
     {
         return !(date_wrap1 > date_wrap2);
     }
 
-    //#15
     DateWrap DateWrap::operator++(int)
     {
         DateWrap original_date = DateWrap(*this);
@@ -125,7 +114,6 @@ namespace mtm
         return original_date;
     }
 
-    //#16
     DateWrap& operator+=(DateWrap& date_wrap, int days)
     {
         if(days < 0)
@@ -140,17 +128,15 @@ namespace mtm
         return date_wrap;
     }
 
-    //#17 
     DateWrap operator+(const DateWrap& date_wrap, int days)
     {  
-    DateWrap temp_date = DateWrap(date_wrap);
-    temp_date += days;
-    return temp_date; 
+        DateWrap temp_date = DateWrap(date_wrap);
+        temp_date += days;
+        return temp_date; 
     }
 
-    //#18 
     DateWrap operator+(int days, const DateWrap& date_wrap)
     {
-    return operator+(date_wrap, days);
+        return operator+(date_wrap, days);
     }
 }
